@@ -1,6 +1,0 @@
-module Pods_Lee_App_Lee_AppTests {
-  umbrella header "Pods-Lee_App-Lee_AppTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
