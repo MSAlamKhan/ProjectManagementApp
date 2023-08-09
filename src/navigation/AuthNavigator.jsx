@@ -17,6 +17,7 @@ const AuthNavigator = () => {
           
         <Stack.Screen name="mainsplash" component={SplashScreen} />
         <Stack.Screen name="signin" component={Signin} />
+       
         
       </Stack.Navigator>
     </NavigationContainer>

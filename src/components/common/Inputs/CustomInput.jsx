@@ -8,10 +8,13 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 
 const CustomInput = forwardRef((props, ref) => {
+
+  const [isVisible, setVisible] = useState(true);
   const { field } = useController({
     control: props.control,
     defaultValue: props.defaultValue || "",
@@ -104,10 +107,17 @@ const CustomInput = forwardRef((props, ref) => {
             style={{ alignSelf: "center", marginRight: moderateScale(10) }}
           />
         ) : null}
-        {props.wordcount == true ? (
-          <View style={styles.CountContainer}>
-            <Text style={styles.CountText}>0/300 Characters</Text>
-          </View>
+        {props.password == true ? (
+          <MaterialCommunityIcons
+            name={isVisible ? 'eye-off-outline' : 'eye-outline'}
+            size={scale(18)}
+            color={Colors.IconColor}
+            onPress={() => setVisible(!isVisible)}
+            // style={{
+            //   alignSelf: 'center',
+            //   marginLeft: '5%',
+            // }}
+          />
         ) : null}
       </View>
     </>
@@ -116,37 +126,29 @@ const CustomInput = forwardRef((props, ref) => {
 
 const styles = StyleSheet.create({
   UpperText: {
-    fontFamily: Font.Poppins500,
+    fontFamily: Font.AnekBangla500,
     color: Colors.Black,
     fontSize: scale(16),
   },
   InputStyles: {
     flex: 1,
-    // height: '100%',
-    color: Colors.Black,
-    fontFamily: Font.AnekBangla400,
+    color: Colors.White,
+    fontFamily: Font.AnekBangla500,
+    top:0.5,
+    paddingHorizontal:moderateScale(10)
+  
+  
   },
   smallbox: {
-    // alignSelf: 'center',
-    // alignItems: 'center',
-    // // justifyContent: 'space-between',
-    // flexDirection: 'row',
-    // marginTop: verticalScale(20),
-    // width: '100%',
-    // paddingHorizontal: moderateScale(20),
-    // height: verticalScale(50),
-    // backgroundColor: Colors.White,
-    // borderWidth: scale(1),
-    // borderColor: Colors.InputContainer,
-    // borderRadius: scale(25),
-
+    backgroundColor: Colors.Black,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.White,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    borderRadius: scale(8),
+    // paddingVertical: 8,
+    paddingHorizontal: moderateScale(10),
+    marginTop:verticalScale(10)
   },
 });
 export default CustomInput;

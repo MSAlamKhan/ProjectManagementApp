@@ -3,7 +3,8 @@ export const Colors = {
     Blue: '#0054B7',
     IconColor: '#79747E',
     White: '#fff',
-    Black: '#000'
+    Black: '#000',
+    BottomIcon: '#5760A5'
 
 
 }

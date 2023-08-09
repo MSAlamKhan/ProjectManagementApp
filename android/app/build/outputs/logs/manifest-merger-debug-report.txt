@@ -11,6 +11,7 @@ MERGED from [com.facebook.flipper:flipper:0.182.0] C:\Users\FBC\.gradle\caches\t
 MERGED from [:react-native-vector-icons] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-svg] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.72.3] C:\Users\FBC\.gradle\caches\transforms-3\c89beba49bda3c7ff0db4787685e5ed7\transformed\jetified-react-android-0.72.3-debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:hermes-android:0.72.3] C:\Users\FBC\.gradle\caches\transforms-3\430a607cf6d546758ce98bd168677a7b\transformed\jetified-hermes-android-0.72.3-debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.5.0] C:\Users\FBC\.gradle\caches\transforms-3\463b085172aadec89519c358dac4e9e6\transformed\jetified-imagepipeline-okhttp3-2.5.0\AndroidManifest.xml:2:1-9:12
@@ -180,6 +181,8 @@ MERGED from [:react-native-safe-area-context] C:\Users\FBC\Desktop\Bilal Raza\Pr
 MERGED from [:react-native-safe-area-context] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-svg] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-svg] C:\Users\FBC\Desktop\Bilal Raza\ProjectManagementApp\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.72.3] C:\Users\FBC\.gradle\caches\transforms-3\c89beba49bda3c7ff0db4787685e5ed7\transformed\jetified-react-android-0.72.3-debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.72.3] C:\Users\FBC\.gradle\caches\transforms-3\c89beba49bda3c7ff0db4787685e5ed7\transformed\jetified-react-android-0.72.3-debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:hermes-android:0.72.3] C:\Users\FBC\.gradle\caches\transforms-3\430a607cf6d546758ce98bd168677a7b\transformed\jetified-hermes-android-0.72.3-debug\AndroidManifest.xml:5:5-44
