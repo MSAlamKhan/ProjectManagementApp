@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-
 //Icons Import
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -19,8 +18,8 @@ import Setting from "../screens/SalesSide/Setting/Setting";
 import { scale, verticalScale } from "react-native-size-matters";
 import { Font } from "../utils/font";
 import JobForm from "../components/common/Cards/JobForm";
-
-
+import AddLead from "../screens/SalesSide/Home/AddLead";
+import ImageSelection from "../components/common/ImageSelection";
 
 const StudentNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -34,29 +33,23 @@ const StudentNavigator = () => {
           headerShown: false,
           tabBarActiveTintColor: Colors.Black,
           tabBarInactiveTintColor: Colors.BottomIcon,
-          tabBarStyle :{
-            height:verticalScale(65),
-            paddingTop:verticalScale(10),
-            paddingBottom:verticalScale(2)
-            
-          }
-          
-          
+          tabBarStyle: {
+            height: verticalScale(65),
+            paddingTop: verticalScale(10),
+            paddingBottom: verticalScale(2),
+          },
         }}
-      
-      
       >
         <Tab.Screen
           name="Home"
-          
           component={AllHome}
           options={{
-         tabBarLabelStyle : {
-            fontFamily:Font.AnekBangla400,
-            fontSize:scale(12)
-         },
+            tabBarLabelStyle: {
+              fontFamily: Font.AnekBangla400,
+              fontSize: scale(12),
+            },
             tabBarLabel: "Home",
-            
+
             tabBarIcon: ({ color, size }) => (
               <Octicons name={"home"} color={color} size={scale(26)} />
             ),
@@ -66,13 +59,13 @@ const StudentNavigator = () => {
           name="Profile"
           component={AllProfile}
           options={{
-            tabBarLabelStyle : {
-              fontFamily:Font.AnekBangla400,
-              fontSize:scale(12)
-           },
+            tabBarLabelStyle: {
+              fontFamily: Font.AnekBangla400,
+              fontSize: scale(12),
+            },
             tabBarLabel: "Profile",
             tabBarIcon: ({ color, size }) => (
-              <Feather name={"user"} color={color}  size={size} />
+              <Feather name={"user"} color={color} size={size} />
             ),
           }}
         />
@@ -81,28 +74,26 @@ const StudentNavigator = () => {
           name="Notification"
           component={AllNotification}
           options={{
-            tabBarLabelStyle : {
-              fontFamily:Font.AnekBangla400,
-              fontSize:scale(12)
-           },
+            tabBarLabelStyle: {
+              fontFamily: Font.AnekBangla400,
+              fontSize: scale(12),
+            },
             tabBarLabel: "Notification",
             tabBarIcon: ({ color, size }) => (
-              <Ionicons  name={"notifications"}color={color}  size={size} />
+              <Ionicons name={"notifications"} color={color} size={size} />
             ),
           }}
         />
-
-        
 
         <Tab.Screen
           name="Setting"
           component={AllSetting}
           options={{
             tabBarLabel: "Setting",
-            tabBarLabelStyle : {
-              fontFamily:Font.AnekBangla400,
-              fontSize:scale(12)
-           },
+            tabBarLabelStyle: {
+              fontFamily: Font.AnekBangla400,
+              fontSize: scale(12),
+            },
             tabBarIcon: ({ color, size }) => (
               <Feather name={"settings"} color={color} size={size} />
             ),
@@ -124,7 +115,8 @@ function AllHome() {
       initialRouteName="homemain"
     >
       <Stack.Screen name="homemain" component={Home} />
-      <Stack.Screen name="jobform" component={JobForm} />
+      <Stack.Screen name="addlead" component={AddLead} />
+      <Stack.Screen name="imageselection" component={ImageSelection} />
     </Stack.Navigator>
   );
 }
@@ -161,9 +153,3 @@ function AllSetting() {
     </Stack.Navigator>
   );
 }
-
-
-
-
-
-

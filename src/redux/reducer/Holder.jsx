@@ -2,12 +2,14 @@ export const IS_SIGN_IN = 'IS_SIGN_IN';
 export const USER_DETAILS = 'USER_DETAILS';
 export const OTP = 'OTP';
 export const ROLE_ID = 'ROLE_ID';
+export const JOB_DATA = 'JOB_DATA'
 
 const initial_state = {
   userDetails: null,
   isSignin: null,
   otp: null,
   role_id: '',
+  jobData : null
 };
 
 const holderReducer = (state = initial_state, action) => {
@@ -32,6 +34,12 @@ const holderReducer = (state = initial_state, action) => {
         ...state,
         role_id: action.payload,
       };
+
+      case JOB_DATA:
+        return {
+          ...state,
+          jobData: action.payload,
+        };
     default: {
       return state;
     }

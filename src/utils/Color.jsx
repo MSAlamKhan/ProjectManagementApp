@@ -4,7 +4,9 @@ export const Colors = {
     IconColor: '#79747E',
     White: '#fff',
     Black: '#000',
-    BottomIcon: '#5760A5'
+    BottomIcon: '#5760A5',
+    AddBack :  '#D9D9D9',
+    GreyText: '#79747E'
 
 
 }

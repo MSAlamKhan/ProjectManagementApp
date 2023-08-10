@@ -1,12 +1,22 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../utils/Color";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
 const BackIcon = () => {
+
+  const navigation = useNavigation();
   return (
     <View style={{ paddingHorizontal: moderateScale(20) }}>
-      <View
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
         style={{
           backgroundColor: Colors.Blue,
           borderRadius: scale(30),
@@ -15,8 +25,8 @@ const BackIcon = () => {
           justifyContent: "center",
           width: scale(36),
           height: scale(36),
-          
-          marginVertical: verticalScale(20)
+
+          marginVertical: verticalScale(20),
         }}
       >
         <MaterialIcons
@@ -25,7 +35,7 @@ const BackIcon = () => {
           size={scale(20)}
           style={{ alignSelf: "center" }}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -49,7 +49,7 @@ const Home = ({navigation}) => {
         <View style={{paddingHorizontal:moderateScale(10)}}>
             <Graph/>
 
-            <CustomButton onPress = {()=>navigation.navigate('jobform')} containerRestyle = {{marginVertical:verticalScale(20)}} title={'Add New Lead'} />
+            <CustomButton onPress = {()=>navigation.navigate('addlead')} containerRestyle = {{marginVertical:verticalScale(20)}} title={'Add New Lead'} />
           </View>
       </ScrollView>
     </Background>

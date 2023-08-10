@@ -1,6 +1,12 @@
-import React, { forwardRef, useState, TouchableOpacity } from "react";
+import React, { forwardRef, useState } from "react";
 import { useController } from "react-hook-form";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -8,12 +14,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 
 const CustomInput = forwardRef((props, ref) => {
-
   const [isVisible, setVisible] = useState(true);
   const { field } = useController({
     control: props.control,
@@ -100,16 +105,40 @@ const CustomInput = forwardRef((props, ref) => {
           />
         ) : null}
         {props.send ? (
-          <Feather
-            name={"send"}
-            size={props.size}
-            color={"#18516E"}
-            style={{ alignSelf: "center", marginRight: moderateScale(10) }}
-          />
+          <TouchableOpacity>
+            <Feather
+              name={"send"}
+              size={props.size}
+              color={"#18516E"}
+              style={{ alignSelf: "center", marginRight: moderateScale(10) }}
+            />
+          </TouchableOpacity>
+        ) : null}
+
+        {props.camera ? (
+          <TouchableOpacity onPress={props.onCameraPress}>
+            <MaterialCommunityIcons
+              name={"camera-plus-outline"}
+              size={props.size}
+              color={Colors.IconColor}
+              style={{ alignSelf: "center", marginRight: moderateScale(10) }}
+            />
+          </TouchableOpacity>
+        ) : null}
+
+        {props.video ? (
+          <TouchableOpacity onPress={props.onVideoPress}>
+            <MaterialCommunityIcons
+              name={"movie-plus-outline"}
+              size={props.size}
+              color={Colors.IconColor}
+              style={{ alignSelf: "center", marginRight: moderateScale(10) }}
+            />
+          </TouchableOpacity>
         ) : null}
         {props.password == true ? (
           <MaterialCommunityIcons
-            name={isVisible ? 'eye-off-outline' : 'eye-outline'}
+            name={isVisible ? "eye-off-outline" : "eye-outline"}
             size={scale(18)}
             color={Colors.IconColor}
             onPress={() => setVisible(!isVisible)}
@@ -134,10 +163,8 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.White,
     fontFamily: Font.AnekBangla500,
-    top:0.5,
-    paddingHorizontal:moderateScale(10)
-  
-  
+    top: 0.5,
+    paddingHorizontal: moderateScale(10),
   },
   smallbox: {
     backgroundColor: Colors.Black,
@@ -148,7 +175,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(8),
     // paddingVertical: 8,
     paddingHorizontal: moderateScale(10),
-    marginTop:verticalScale(10)
+    marginTop: verticalScale(10),
   },
 });
 export default CustomInput;
