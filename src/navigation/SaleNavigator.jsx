@@ -12,16 +12,18 @@ import Octicons from "react-native-vector-icons/Octicons";
 
 import { Colors } from "../utils/Color";
 import Home from "../screens/SalesSide/Home/Home";
-import Profile from "../screens/SalesSide/Profile/Profile";
 import Notification from "../screens/SalesSide/Notification/Notification";
-import Setting from "../screens/SalesSide/Setting/Setting";
 import { scale, verticalScale } from "react-native-size-matters";
 import { Font } from "../utils/font";
 import JobForm from "../components/common/Cards/JobForm";
 import AddLead from "../screens/SalesSide/Home/AddLead";
 import ImageSelection from "../components/common/ImageSelection";
+import JobMain from "../screens/SalesSide/Home/JobMain";
+import AllTask from "../screens/SalesSide/Home/AllTask";
+import Setting from "../screens/common/Setting";
+import ProfileEdit from "../screens/common/ProfileEdit";
 
-const StudentNavigator = () => {
+const SaleNavigator = () => {
   const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
@@ -55,20 +57,7 @@ const StudentNavigator = () => {
             ),
           }}
         />
-        <Tab.Screen
-          name="Profile"
-          component={AllProfile}
-          options={{
-            tabBarLabelStyle: {
-              fontFamily: Font.AnekBangla400,
-              fontSize: scale(12),
-            },
-            tabBarLabel: "Profile",
-            tabBarIcon: ({ color, size }) => (
-              <Feather name={"user"} color={color} size={size} />
-            ),
-          }}
-        />
+      
 
         <Tab.Screen
           name="Notification"
@@ -104,7 +93,7 @@ const StudentNavigator = () => {
   );
 };
 
-export default StudentNavigator;
+export default SaleNavigator;
 
 const Stack = createNativeStackNavigator();
 
@@ -117,20 +106,12 @@ function AllHome() {
       <Stack.Screen name="homemain" component={Home} />
       <Stack.Screen name="addlead" component={AddLead} />
       <Stack.Screen name="imageselection" component={ImageSelection} />
+      <Stack.Screen name="jobmain" component={JobMain} />
+      <Stack.Screen name="alltask" component={AllTask} />
     </Stack.Navigator>
   );
 }
 
-function AllProfile() {
-  return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="profile"
-    >
-      <Stack.Screen name="profile" component={Profile} />
-    </Stack.Navigator>
-  );
-}
 
 function AllNotification() {
   return (
@@ -150,6 +131,7 @@ function AllSetting() {
       initialRouteName="setting"
     >
       <Stack.Screen name="setting" component={Setting} />
+      <Stack.Screen name="profileedit" component={ProfileEdit} />
     </Stack.Navigator>
   );
 }

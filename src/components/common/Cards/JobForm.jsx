@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
 
-const JobForm = ({ onSubmit,...props }) => {
+const JobForm = ({ onSubmit,...props}) => {
 
   const navigation = useNavigation()
   const {
@@ -194,7 +194,7 @@ const JobForm = ({ onSubmit,...props }) => {
       <CustomButton
         containerRestyle={{ marginVertical: verticalScale(10) }}
         onPress={handleSubmit(onSubmit)}
-        title={"Add"}
+        title={props.type == 'edit' ? "Save" : "Add"}
       />
     </View>
   );

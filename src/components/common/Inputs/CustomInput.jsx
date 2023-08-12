@@ -94,6 +94,7 @@ const CustomInput = forwardRef((props, ref) => {
           placeholderStyle={props.placeholderStyle}
           fontSize={props.fontSize}
           maxLength={props.maxLength}
+          editable = {props.editable}
         />
         {props.search ? (
           <Feather

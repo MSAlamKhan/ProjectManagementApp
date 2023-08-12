@@ -6,7 +6,10 @@ export const Colors = {
     Black: '#000',
     BottomIcon: '#5760A5',
     AddBack :  '#D9D9D9',
-    GreyText: '#79747E'
+    GreyText: '#79747E',
+    Red: '#EB2E2E',
+    borderColor : '#A4A9CE',
+    DateSelect: '#2FD1C5'
 
 
 }

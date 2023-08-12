@@ -33,7 +33,6 @@ const ImageSelection = ({ route }) => {
   const handlePhoto = () => {};
   //Image Functionality
   const [imageModal, openImageModal] = useState(false);
-  const [show, setShow] = useState(true);
   const [saveimage, setsaveimage] = useState(false);
 
   const [images, setImages] = useState(Array.from({ length: 10 }, () => null));
@@ -167,7 +166,7 @@ const ImageSelection = ({ route }) => {
         onPress={handleSubmit}
         containerRestyle={styles.Button}
       />
-      <ImagePickerModal
+      {/* <ImagePickerModal
         visible={imageModal}
         OnPressCamera={() => {
           camerasave();
@@ -176,7 +175,7 @@ const ImageSelection = ({ route }) => {
           handlePhoto(index);
         }}
         onClose={closeImageModal}
-      />
+      /> */}
 
       <CustomLotti
         isVisible={successModal}

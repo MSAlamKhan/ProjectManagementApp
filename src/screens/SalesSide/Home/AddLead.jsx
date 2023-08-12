@@ -11,7 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { JOB_DATA } from "../../../redux/reducer/Holder";
 import CustomLotti from "../../../components/common/Modals/CustomLotti";
 
-const AddLead = ({ navigation }) => {
+const AddLead = ({ navigation,route }) => {
+
+  const {type} = route.params;
+  console.log('type', type)
+
   const [successModal, setSuccessModal] = useState(false);
   const {
     control,
@@ -37,6 +41,7 @@ const AddLead = ({ navigation }) => {
         <View style={GlobalStyle.ph20}>
           <JobForm
             onSubmit={onSubmit}
+            type = {type}
             onCameraPress={() => navigation.navigate("imageselection",{
                 type: 'image',
                 title: 'Upload Image'
@@ -55,7 +60,7 @@ const AddLead = ({ navigation }) => {
       <CustomLotti
         isVisible={successModal}
         source={require("../../../assets/lotti/success.json")}
-        Title={"Job Added!"}
+        Title={ type == 'edit'? 'Saved!':"Job Added!"}
       />
     </Background>
   );

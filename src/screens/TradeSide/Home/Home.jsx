@@ -11,14 +11,15 @@ import CustomButton from "../../../components/common/Button/CustomButton";
 
 const Home = ({ navigation }) => {
   card_data = [
-    { id: 1, total: "Total Number of Project", amount: "7", color: "#0077B6" },
+    { id: 1, total: "Total Job assigned", amount: "9", color: "#0077B6" },
     {
       id: 2,
-      total: "Total Projects underprogress",
+      total: "Total number of pending jobs",
       amount: "7",
       color: "#FFAD41",
     },
-    { id: 3, total: "Total completed Projects", amount: "7", color: "#1E90FF" },
+    { id: 3, total: "Total completed submissions", amount: "7", color: "#1E90FF" },
+    { id: 4, total: "Total number of job delivered late", amount: "7", color: "#1E90FF" },
   ];
   return (
     <Background>
@@ -47,9 +48,9 @@ const Home = ({ navigation }) => {
           <Graph />
 
           <CustomButton
-            onPress={() => navigation.navigate("jobmain")}
+            onPress={() => navigation.navigate("calendar")}
             containerRestyle={{ marginVertical: verticalScale(20) }}
-            title={"Add New Lead"}
+            title={"View Calendar"}
           />
         </View>
       </ScrollView>
