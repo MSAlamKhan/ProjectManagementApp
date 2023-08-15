@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView,Dimensions } from "react-native";
 import React from "react";
 import Background from "../../../components/common/Background";
 import BackIcon from "../../../components/common/BackIcon";
@@ -10,6 +10,7 @@ import Graph from "../../../components/common/Graph";
 import CustomButton from "../../../components/common/Button/CustomButton";
 
 const Home = ({ navigation }) => {
+  const windowHeight = Dimensions.get("window").height;
   card_data = [
     { id: 1, total: "Total Number of Project", amount: "7", color: "#0077B6" },
     {
@@ -22,9 +23,9 @@ const Home = ({ navigation }) => {
   ];
   return (
     <Background>
-      <BackIcon />
       <ScrollView>
         <View style={GlobalStyle.ph20}>
+            <View style={{ height: windowHeight * 0.05 }} />
           <View style={styles.TextView}>
             <Text style={GlobalStyle.BlueText}>Welcome To,</Text>
             <Text style={GlobalStyle.BlackText}>Trax Jobsite</Text>

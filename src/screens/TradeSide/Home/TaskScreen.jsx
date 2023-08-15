@@ -3,7 +3,7 @@ import React from 'react'
 import Background from '../../../components/common/Background'
 import BackIcon from '../../../components/common/BackIcon'
 import { GlobalStyle } from '../../../constant/GlobalStyle'
-import JobForm from '../../../components/common/Cards/JobForm'
+
 import TaskCard from '../../../components/common/Cards/TaskCard'
 
 const TaskScreen = () => {

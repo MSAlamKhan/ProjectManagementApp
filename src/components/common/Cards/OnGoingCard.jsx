@@ -19,7 +19,7 @@ const OnGoingCard = ({ data, ...props }) => {
 
             <View style={{ alignSelf:'flex-end',marginTop:verticalScale(5) }}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('taskscreen')} 
+                    onPress={props.onPress} 
                     style={styles.MoreView}>
                     <Text style={styles.MoreText}>More</Text>
                     <View style={styles.Box}>

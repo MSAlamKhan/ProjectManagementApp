@@ -12,19 +12,19 @@ import { GlobalStyle } from "../../../constant/GlobalStyle";
 import Feather from "react-native-vector-icons/Feather";
 import { Font } from "../../../utils/font";
 
-const TaskCard = ({type}) => {
+const TaskCard = ({type,...props}) => {
   console.log("type", type);
 
   return (
-    <View style={styles.Main}>
+    <TouchableOpacity activeOpacity={0.8} onPress={props.onPress} style={styles.Main}>
       <View style={styles.HeadingView}>
         <Text style={styles.Heading}>Task 1</Text>
       </View>
-      {type &&  (
+      {/* {type &&  (
         <Text style={styles.Red}>
           REASON: I was not able to come because of a family emergency
         </Text>
-      )}
+      )} */}
 
       <View style={GlobalStyle.Row}>
         <View
@@ -54,7 +54,7 @@ const TaskCard = ({type}) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

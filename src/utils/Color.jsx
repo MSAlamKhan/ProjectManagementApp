@@ -9,7 +9,8 @@ export const Colors = {
     GreyText: '#79747E',
     Red: '#EB2E2E',
     borderColor : '#A4A9CE',
-    DateSelect: '#2FD1C5'
+    DateSelect: '#2FD1C5',
+    Green: '#06A23E'
 
 
 }

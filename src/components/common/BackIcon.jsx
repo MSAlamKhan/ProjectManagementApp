@@ -10,11 +10,18 @@ import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../utils/Color";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
-const BackIcon = () => {
-
+import { Font } from "../../utils/font";
+const BackIcon = (props) => {
   const navigation = useNavigation();
   return (
-    <View style={{ paddingHorizontal: moderateScale(20) }}>
+    <View
+      style={{
+        paddingHorizontal: moderateScale(20),
+        flexDirection: "row",
+        alignItems: "center",
+        
+      }}
+    >
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={{
@@ -25,7 +32,6 @@ const BackIcon = () => {
           justifyContent: "center",
           width: scale(36),
           height: scale(36),
-
           marginVertical: verticalScale(20),
         }}
       >
@@ -36,10 +42,26 @@ const BackIcon = () => {
           style={{ alignSelf: "center" }}
         />
       </TouchableOpacity>
+
+      {props.title ? (
+        <View style={styles.TextView}>
+          <Text style={styles.Text}>{props.title}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
 
 export default BackIcon;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Text: {
+    fontFamily: Font.AnekBangla700,
+    color: Colors.Black,
+    fontSize: scale(24),
+    textAlign: "center",
+  },
+  TextView: {
+    flex: 1,
+  },
+});

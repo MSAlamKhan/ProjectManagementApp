@@ -18,6 +18,9 @@ import ProfileEdit from "../screens/common/ProfileEdit";
 import Home from "../screens/TradeSide/Home/Home";
 import Calendar from "../screens/TradeSide/Home/Calendar";
 import TaskScreen from "../screens/TradeSide/Home/TaskScreen";
+import Notification from "../screens/common/Notification";
+import ViewJob from "../screens/TradeSide/Jobs/ViewJob";
+import LateJob from "../screens/TradeSide/Jobs/LateJob";
 
 const TradeNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -102,6 +105,8 @@ function AllHome() {
       <Stack.Screen name="homemain" component={Home} />
       <Stack.Screen name="calendar" component={Calendar} />
       <Stack.Screen name="taskscreen" component={TaskScreen} />
+      <Stack.Screen name="viewjob" component={ViewJob} />
+      <Stack.Screen name="latejob" component={LateJob} />
       
     </Stack.Navigator>
   );

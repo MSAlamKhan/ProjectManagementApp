@@ -12,7 +12,6 @@ import Octicons from "react-native-vector-icons/Octicons";
 
 import { Colors } from "../utils/Color";
 import Home from "../screens/SalesSide/Home/Home";
-import Notification from "../screens/SalesSide/Notification/Notification";
 import { scale, verticalScale } from "react-native-size-matters";
 import { Font } from "../utils/font";
 import JobForm from "../components/common/Cards/JobForm";
@@ -22,6 +21,8 @@ import JobMain from "../screens/SalesSide/Home/JobMain";
 import AllTask from "../screens/SalesSide/Home/AllTask";
 import Setting from "../screens/common/Setting";
 import ProfileEdit from "../screens/common/ProfileEdit";
+import Notification from "../screens/common/Notification";
+import CompletedJob from "../screens/SalesSide/Home/CompletedJob";
 
 const SaleNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -108,6 +109,7 @@ function AllHome() {
       <Stack.Screen name="imageselection" component={ImageSelection} />
       <Stack.Screen name="jobmain" component={JobMain} />
       <Stack.Screen name="alltask" component={AllTask} />
+      <Stack.Screen name="completejob" component={CompletedJob} />
     </Stack.Navigator>
   );
 }

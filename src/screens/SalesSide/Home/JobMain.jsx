@@ -9,12 +9,20 @@ import { Colors } from '../../../utils/Color'
 import { moderateScale, scale } from 'react-native-size-matters'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-const JobMain = ({navigation}) => {
+const JobMain = ({ navigation }) => {
     sample = [
-        { id: 1, description: 'HEllo', alert: false },
-        { id: 2, description: 'HEllo', alert: true },
-        { id: 3, description: 'HEllo', alert: true }, { id: 4, description: 'HEllo', alert: false },
-        { id: 5, description: 'HEllo', alert: false },
+        { id: 1, description: 'Hello' },
+        { id: 2, description: 'Hello' },
+        { id: 3, description: 'Hello' }, { id: 4, description: 'Hello' },
+        { id: 5, description: 'Hello' },
+
+    ]
+
+    complete = [
+        { id: 1, description: 'Hello', time: 'ontime' },
+        { id: 2, description: 'Hello', time: 'ontime' },
+        { id: 3, description: 'Hello', time: 'ontime' }, { id: 4, description: 'Hello', time: 'late' },
+        { id: 5, description: 'Hello', time: 'late' },
 
     ]
 
@@ -32,9 +40,9 @@ const JobMain = ({navigation}) => {
                     menuThird={'Completed'}
                     firstData={sample}
                     secondData={sample}
-                    thirdData={sample}
+                    thirdData={complete}
                 />
-                <TouchableOpacity onPress={()=>navigation.navigate('addlead',{type:'addnew'})} style={styles.AddLead}>
+                <TouchableOpacity onPress={() => navigation.navigate('addlead', { type: 'addnew' })} style={styles.AddLead}>
                     <MaterialIcons name={'post-add'} size={scale(50)} color={Colors.White} style={styles.Icon} />
                 </TouchableOpacity>
             </View>
@@ -53,16 +61,16 @@ const styles = StyleSheet.create({
     },
     Icon: {
         position: 'absolute',
-        bottom:0,
-        right:0,
-        zIndex:1,
+        bottom: -5,
+        right: -8,
+        zIndex: 1,
         backgroundColor: Colors.Blue,
-        borderRadius:scale(35),
-        padding:scale(6)
+        borderRadius: scale(35),
+        padding: scale(6)
 
     },
-    AddLead:{
-      
-       
+    AddLead: {
+
+
     }
 })

@@ -1,27 +1,42 @@
-import { StyleSheet, Text, View, TouchableOpacity,Platform} from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
+import React, { useState } from "react";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../../utils/Color";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
 import Feather from "react-native-vector-icons/Feather";
 import { Font } from "../../../utils/font";
 
-const JobCard = ({data,onPress,menu}) => {
+const JobCard = ({ data, onPress, menu, gand }) => {
 
-  console.log('menu', menu)
-  
+  const [select, setSelect] = useState(false);
+
+  console.log('menu', menu);
+
   return (
     <TouchableOpacity activeOpacity={1} onPress={onPress}
-      style={[styles.Main, { borderColor: data.alert && menu == 'third' ? Colors.Red : "#A4A9CE" }]}
+      style={[styles.Main, { borderColor: data.time == 'late'  ? Colors.Red : "#A4A9CE" }]}
     >
       <View style={GlobalStyle.RowBetween}>
         <Text style={styles.BlackText}>Job no.{data.id}</Text>
-        {data.alert && menu == 'third' ? (
+        {data.time == 'late'  ? (
           <Feather name={"alert-circle"} size={scale(22)} color={Colors.Red} />
         ) : null}
       </View>
 
       <Text style={styles.DescText}>{data.description}</Text>
+
+      {gand == 'trade' && data.time == 'ontime' ?
+        <TouchableOpacity onPress={() => setSelect(true)} style={[styles.DoneBox, { backgroundColor: select ? Colors.Blue : Colors.White }]}>
+          <Text style={[styles.DescText, { color: select ? Colors.White : Colors.Black }]}>
+            DONE
+          </Text>
+
+        </TouchableOpacity>
+
+        :
+
+
+        null}
     </TouchableOpacity>
   );
 };
@@ -55,9 +70,20 @@ const styles = StyleSheet.create({
     color: Colors.Black,
   },
 
-  DescText:{
-    fontFamily:Font.AnekBangla500,
+  DescText: {
+    fontFamily: Font.AnekBangla500,
     fontSize: scale(16),
     color: Colors.Black,
+  },
+  DoneBox: {
+    borderWidth: 3,
+    borderRadius: scale(14),
+    borderColor: Colors.Blue,
+    backgroundColor: Colors.White,
+    paddingVertical: verticalScale(2),
+    paddingHorizontal: moderateScale(10),
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

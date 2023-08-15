@@ -15,7 +15,7 @@ import {
 import { Font } from "../../../utils/font";
 import OnGoingCard from "../../../components/common/Cards/OnGoingCard";
 
-const Calendar = () => {
+const Calendar = ({navigation}) => {
 
     const task_details = [
         { id: 1, name: 'House Remodeling', backgroundColor: '#FFB017' },
@@ -74,7 +74,7 @@ const Calendar = () => {
 
                 {task_details.map((details,index)=>{
                     return(
-                        <OnGoingCard key={index} data = {details} />
+                        <OnGoingCard key={index} data = {details} onPress= {()=>navigation.navigate('viewjob')} />
                     )
                 })}
              
