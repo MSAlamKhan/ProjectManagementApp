@@ -9,7 +9,7 @@ const initial_state = {
   isSignin: null,
   otp: null,
   role_id: '',
-  jobData : null
+  jobData : []
 };
 
 const holderReducer = (state = initial_state, action) => {

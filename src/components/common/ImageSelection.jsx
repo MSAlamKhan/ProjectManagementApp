@@ -16,14 +16,14 @@ import { useNavigation } from "@react-navigation/native";
 
 const ImageSelection = ({ route }) => {
   const navigation = useNavigation();
-  const { type, title } = route.params;
+  const { type, title,getImages } = route.params;
 
   const [successModal, setSuccessModal] = useState(false);
   const handleSubmit = () => {
-    console.log("images", imageChoosen);
     setSuccessModal(true);
     setTimeout(() => {
       setSuccessModal(false);
+      getImages(imageChoosen);
       navigation.goBack();
     }, 2000);
   };

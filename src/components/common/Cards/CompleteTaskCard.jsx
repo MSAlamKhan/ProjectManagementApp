@@ -5,7 +5,7 @@ import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
 
-const CompleteTaskCard = ({ data }) => {
+const CompleteTaskCard = ({ data, type, time }) => {
   return (
     <View style={styles.MainBox}>
       <Text style={styles.Heading}>Task {data.id}</Text>
@@ -31,12 +31,23 @@ const CompleteTaskCard = ({ data }) => {
         <Text style={styles.Detail}>{data.description}</Text>
       </View>
 
-      <View style={styles.WhiteBox}>
-        <Text style={[styles.SubHeading, { color: Colors.Red }]}>
-          Late Reason:
-        </Text>
-        <Text style={styles.Detail}>I was sick</Text>
-      </View>
+      {/* If completed jobs and is late */}
+      {type == "completed" ? (
+        time == "late" ? (
+          <View style={styles.WhiteBox}>
+            <Text style={[styles.SubHeading, { color: Colors.Red }]}>
+              Late Reason:
+            </Text>
+            <Text style={styles.Detail}>I was sick</Text>
+          </View>
+        ) : (
+          <View style={styles.WhiteBox}>
+            <Text style={[styles.SubHeading, { color: Colors.Green }]}>
+              On Time
+            </Text>
+          </View>
+        )
+      ) : null}
     </View>
   );
 };
@@ -65,8 +76,7 @@ const styles = StyleSheet.create({
   },
   TitleContainer: {
     flex: 1, // Add flex property to allow wrapping
-    maxWidth: '100%', // You can adjust this value as needed
-
+    maxWidth: "100%", // You can adjust this value as needed
   },
   Title: {
     color: Colors.Black,

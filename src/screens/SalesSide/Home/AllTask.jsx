@@ -6,15 +6,17 @@ import BackIcon from '../../../components/common/BackIcon'
 import { GlobalStyle } from '../../../constant/GlobalStyle'
 
 const AllTask = ({route,navigation}) => {
-  type = route.params;
-  console.log('type', type)
+  
+const {type,time} = route.params;
+  console.log('type dekhle',type)
+  console.log('time', time)
   return (
     <Background>
         <BackIcon/>
 
         <View style={GlobalStyle.ph20flex}>
 
-      <TaskCard type={type} onPress = {()=>navigation.navigate('completejob')} />
+      <TaskCard  onPress = {()=>navigation.navigate('completejob',{type:type,time:time})} />
         </View>
     </Background>
   )

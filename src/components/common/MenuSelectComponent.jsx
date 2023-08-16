@@ -8,6 +8,7 @@ import JobCard from "./Cards/JobCard";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
+import DeleteModal from "./Modals/DeleteModal";
 
 const MenuSelectComponent = ({
   menuFirst,
@@ -21,6 +22,19 @@ const MenuSelectComponent = ({
   const [menu, setMenu] = useState("first");
 
   const navigation = useNavigation();
+
+  const handleNavigate = (item) =>{
+    console.log('menu', menu)
+    if (menu === 'third') {
+      navigation.navigate('alltask',{type:'completed', time: item.time })
+    } else {
+
+      navigation.navigate('alltask',{time: item.time})
+      
+    }
+  }
+
+  const [deleteModal, setDeleteModal] = useState(false)
   return (
     <View>
       <View style={styles.Bar}>
@@ -95,16 +109,14 @@ const MenuSelectComponent = ({
           menu === "first"
             ? firstData
             : menu == "second"
-            ? secondData
-            : thirdData
+              ? secondData
+              : thirdData
         }
         // keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => {
           return (
             <JobCard
-              onPress={() =>
-                navigation.navigate("alltask", { time: item.time })
-              }
+              onPress={()=>handleNavigate(item)}
               menu={menu}
               data={item}
             />
@@ -120,7 +132,7 @@ const MenuSelectComponent = ({
             </TouchableOpacity>
 
             <TouchableOpacity
-              // onPress={() => setReasonModal(true)}
+              onPress={() => setDeleteModal(true)}
               style={styles.IconBox}
             >
               <AntDesign name="delete" size={scale(30)} color={Colors.Red} />
@@ -132,6 +144,14 @@ const MenuSelectComponent = ({
         disableLeftSwipe={menu == "first" ? false : true}
         rightOpenValue={scale(-80)}
         leftOpenValue={scale(80)}
+      />
+
+      <DeleteModal
+        isVisible={deleteModal}
+        onBackdropPress={() => setDeleteModal(false)}
+        onDelete={() => setDeleteModal(false)}
+        onCancel={() => setDeleteModal(false)} //for the time being
+
       />
     </View>
   );

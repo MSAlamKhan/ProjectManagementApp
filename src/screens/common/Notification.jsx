@@ -5,6 +5,7 @@ import Background from "../../components/common/Background";
 import BackIcon from "../../components/common/BackIcon";
 import NotificationCard from "../../components/common/NotificationCard";
 
+
 const Notification = () => {
   const notification_data = [
     {
@@ -31,6 +32,8 @@ const Notification = () => {
       
     },
   ];
+
+
 
   return (
     <Background>

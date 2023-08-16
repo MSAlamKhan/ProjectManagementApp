@@ -46,7 +46,7 @@ const Home = ({ navigation }) => {
             })}
           </View>
         </View>
-        <View style={{ paddingHorizontal: moderateScale(10) }}>
+        <View style={{ paddingHorizontal: moderateScale(10),marginTop:verticalScale(10) }}>
           <Graph />
 
           <CustomButton

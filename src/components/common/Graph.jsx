@@ -29,7 +29,7 @@ const Graph = () => {
         data: [20, 45, 28, 80, 99, 43],
       },
     ],
-    legend: ['Ads Spending'],
+    legend: ['Workload'],
   };
   return (
     <View

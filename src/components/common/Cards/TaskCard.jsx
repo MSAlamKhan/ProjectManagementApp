@@ -12,8 +12,9 @@ import { GlobalStyle } from "../../../constant/GlobalStyle";
 import Feather from "react-native-vector-icons/Feather";
 import { Font } from "../../../utils/font";
 
-const TaskCard = ({type,...props}) => {
-  console.log("type", type);
+const TaskCard = ({route,...props}) => {
+  
+  
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={props.onPress} style={styles.Main}>

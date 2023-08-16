@@ -19,7 +19,7 @@ import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 
 const CustomInput = forwardRef((props, ref) => {
-  const [isVisible, setVisible] = useState(true);
+  // const [isVisible, setVisible] = useState(true);
   const { field } = useController({
     control: props.control,
     defaultValue: props.defaultValue || "",
@@ -139,10 +139,10 @@ const CustomInput = forwardRef((props, ref) => {
         ) : null}
         {props.password == true ? (
           <MaterialCommunityIcons
-            name={isVisible ? "eye-off-outline" : "eye-outline"}
+            name={props.isVisible ? "eye-off-outline" : "eye-outline"}
             size={scale(18)}
             color={Colors.IconColor}
-            onPress={() => setVisible(!isVisible)}
+            onPress={props.onPassPress}
             // style={{
             //   alignSelf: 'center',
             //   marginLeft: '5%',

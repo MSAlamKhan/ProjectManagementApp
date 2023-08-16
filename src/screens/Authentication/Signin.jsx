@@ -7,7 +7,7 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import Background from "../../components/common/Background";
 import CustomInput from "../../components/common/Inputs/CustomInput";
 import { useForm } from "react-hook-form";
@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGN_IN } from "../../redux/reducer/Holder";
 
 const Signin = () => {
+
+  const [isVisible, setVisible] = useState(true);
   const windowHeight = Dimensions.get("window").height;
   const signIn = useSelector((state) => state.isSignin);
   const dispatch = useDispatch();
@@ -38,99 +40,104 @@ const Signin = () => {
   };
   return (
     <Background>
-      <BackIcon />
+      {/* <BackIcon /> */}
+      <View style={{ height: windowHeight * 0.2 }} />
 
-      <ScrollView keyboardShouldPersistTaps="always" showsVerticalScrollIndicator={false}>
-        <View style={GlobalStyle.ph20flex}>
-          <View style={{ height: windowHeight * 0.2 }} />
-          <View style={{ justifyContent: "center" }}>
-            <View>
-              <Text style={GlobalStyle.BlueText}>Welcome,</Text>
-              <Text style={GlobalStyle.BlackText}>Trax Jobsite</Text>
-            </View>
-            <CustomInput
-              fontSize={scale(16)}
-              MaterialIcons={true}
-              size={scale(18)}
-              MaterialIcons_Name="email"
-              control={control}
-              keyboardType="email-address"
-              name="email"
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                  message: "Email is not valid",
-                },
-              }}
-              placeholder="Email Address"
-            />
-            {errors.email && (
-              <Error
-                textStyle={{ color: Colors.Black }}
-                text={errors.email.message}
-              />
-            )}
+      <View style={[GlobalStyle.ph20flex]}>
 
-            <CustomInput
-              password={true}
-              fontSize={scale(16)}
-              Feather={true}
-              size={scale(18)}
-              Feather_Name={"lock"}
-              control={control}
-              maxLength={20}
-              name="password"
-              rules={{
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "*Password too short (minimum length is 8)",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "*Password too long (maximum length is 16)",
-                },
-              }}
-              placeholder="Password"
-            />
-            {errors.password && (
-              <Error
-                textStyle={{ color: Colors.Black }}
-                text={errors.password.message}
-              />
-            )}
 
-            <TouchableOpacity style={styles.Forgot}>
-              <Text style={styles.ForgotText}>Forgot Password?</Text>
-            </TouchableOpacity>
-
-            <CustomButton
-              title={"Sign in"}
-              containerRestyle={{ marginTop: verticalScale(10) }}
-              onPress={handleSubmit(onSubmit)}
-            />
+        <View style={{ justifyContent: "center" }}>
+          <View>
+            <Text style={GlobalStyle.BlueText}>Welcome,</Text>
+            <Text style={GlobalStyle.BlackText}>Trax Jobsite</Text>
           </View>
+          <CustomInput
+            fontSize={scale(16)}
+            MaterialIcons={true}
+            size={scale(18)}
+            MaterialIcons_Name="email"
+            control={control}
+            keyboardType="email-address"
+            name="email"
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                message: "Email is not valid",
+              },
+            }}
+            placeholder="Email Address"
+          />
+          {errors.email && (
+            <Error
+              textStyle={{ color: Colors.Black }}
+              text={errors.email.message}
+            />
+          )}
 
+          <CustomInput
+            password={true}
+            fontSize={scale(16)}
+            Feather={true}
+            size={scale(18)}
+            secureTextEntry = {isVisible ? true : false}
+            isVisible = {isVisible}
+            onPassPress = {() => setVisible(!isVisible)}
+            Feather_Name={"lock"}
+            control={control}
+            maxLength={20}
+            name="password"
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "*Password too short (minimum length is 8)",
+              },
+              maxLength: {
+                value: 16,
+                message: "*Password too long (maximum length is 16)",
+              },
+            }}
+            placeholder="Password"
+          />
+          {errors.password && (
+            <Error
+              textStyle={{ color: Colors.Black }}
+              text={errors.password.message}
+            />
+          )}
+
+          <TouchableOpacity style={styles.Forgot}>
+            <Text style={styles.ForgotText}>Forgot Password?</Text>
+          </TouchableOpacity>
+
+          <CustomButton
+            title={"Sign in"}
+            containerRestyle={{ marginTop: verticalScale(10) }}
+            onPress={handleSubmit(onSubmit)}
+          />
+        </View>
+
+        <View
+          style={{
+            alignItems: "flex-end",
+          }}>
           <View
             style={{
-              alignItems: "flex-end"}}
+              height: verticalScale(250),
+              width: scale(204),
+
+            }}
           >
-            <View
-              style={{
-                height: verticalScale(250),
-                width: scale(204),
-              }}
-            >
-              <Image
-                source={require("../../assets/images/logo.png")}
-                style={{ height: "100%", width: "100%" }}
-                resizeMode="contain"
-              />
-            </View>
+            <Image
+              source={require("../../assets/images/logo.png")}
+              style={{ height: "100%", width: "100%" }}
+              resizeMode="contain"
+            />
           </View>
         </View>
-      </ScrollView>
+      </View>
+
     </Background>
   );
 };

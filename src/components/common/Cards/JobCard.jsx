@@ -24,6 +24,7 @@ const JobCard = ({ data, onPress, menu, gand }) => {
       </View>
 
       <Text style={styles.DescText}>{data.description}</Text>
+      <Text style={styles.DescText}>{data.budget}</Text>
 
       {gand == 'trade' && data.time == 'ontime' ?
         <TouchableOpacity onPress={() => setSelect(true)} style={[styles.DoneBox, { backgroundColor: select ? Colors.Blue : Colors.White }]}>

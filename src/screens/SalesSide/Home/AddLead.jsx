@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { JOB_DATA } from "../../../redux/reducer/Holder";
 import CustomLotti from "../../../components/common/Modals/CustomLotti";
 
-const AddLead = ({ navigation,route }) => {
+const AddLead = ({ navigation, route }) => {
+  const [allImages, setAllImages] = useState([]);
 
-  const {type} = route.params;
-  console.log('type', type)
+  const { type, imageChoosen } = route.params;
+  console.log("type", imageChoosen);
 
   const [successModal, setSuccessModal] = useState(false);
   const {
@@ -25,8 +26,11 @@ const AddLead = ({ navigation,route }) => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch({ type: JOB_DATA, action: data });
+  const onSubmit = (obj) => {
+    const data = { ...obj };
+    data.imagesAll = allImages;
+    console.log("data ========>", data);
+    dispatch({ type: JOB_DATA, payload: { data } });
     setSuccessModal(true);
     setTimeout(() => {
       setSuccessModal(false);
@@ -35,32 +39,34 @@ const AddLead = ({ navigation,route }) => {
   };
   return (
     <Background>
-      <BackIcon/>
+      <BackIcon />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={GlobalStyle.ph20}>
           <JobForm
             onSubmit={onSubmit}
-            type = {type}
-            onCameraPress={() => navigation.navigate("imageselection",{
-                type: 'image',
-                title: 'Upload Image'
-            })}
-
-            onVideoPress={() => navigation.navigate("imageselection",{
-                type: 'video',
-                title: 'Upload Video'
-            })}
+            type={type}
+            onCameraPress={() =>
+              navigation.navigate("imageselection", {
+                type: "image",
+                title: "Upload Image",
+                getImages: setAllImages,
+              })
+            }
+            onVideoPress={() =>
+              navigation.navigate("imageselection", {
+                type: "video",
+                title: "Upload Video",
+              })
+            }
           />
-          <View style={{ marginVertical: verticalScale(20) }}>
-
-          </View>
+          <View style={{ marginVertical: verticalScale(20) }}></View>
         </View>
       </ScrollView>
       <CustomLotti
         isVisible={successModal}
         source={require("../../../assets/lotti/success.json")}
-        Title={ type == 'edit'? 'Saved!':"Job Added!"}
+        Title={type == "edit" ? "Saved!" : "Job Added!"}
       />
     </Background>
   );

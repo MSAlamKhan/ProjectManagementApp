@@ -8,6 +8,7 @@ import JobCard from '../../../components/common/Cards/JobCard'
 import { Colors } from '../../../utils/Color'
 import { moderateScale, scale } from 'react-native-size-matters'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { useSelector } from 'react-redux'
 
 const JobMain = ({ navigation }) => {
     sample = [
@@ -26,6 +27,9 @@ const JobMain = ({ navigation }) => {
 
     ]
 
+    const inProgress = useSelector(state => state.jobData);
+    console.log('Type of inProgress:', typeof inProgress);
+    
 
 
     return (
@@ -33,14 +37,19 @@ const JobMain = ({ navigation }) => {
             <BackIcon />
 
             <View style={GlobalStyle.ph20flex}>
+                
+              {inProgress.map((gand,index)=>
+                <Text>gand.email</Text>
+              )}
 
                 <MenuSelectComponent
                     menuFirst={'New'}
                     menuSecond={'In Progress'}
                     menuThird={'Completed'}
                     firstData={sample}
-                    secondData={sample}
+                    secondData={inProgress}
                     thirdData={complete}
+
                 />
                 <TouchableOpacity onPress={() => navigation.navigate('addlead', { type: 'addnew' })} style={styles.AddLead}>
                     <MaterialIcons name={'post-add'} size={scale(50)} color={Colors.White} style={styles.Icon} />

@@ -44,13 +44,13 @@ const Home = ({ navigation }) => {
             })}
           </View>
         </View>
-        <View style={{ paddingHorizontal: moderateScale(10) }}>
+        <View style={{ paddingHorizontal: moderateScale(10),marginTop:verticalScale(10) }}>
           <Graph />
 
           <CustomButton
             onPress={() => navigation.navigate("jobmain")}
             containerRestyle={{ marginVertical: verticalScale(20) }}
-            title={"Add New Lead"}
+            title={"View All Jobs"}
           />
         </View>
       </ScrollView>

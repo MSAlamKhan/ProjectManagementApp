@@ -7,7 +7,10 @@ import { useForm } from "react-hook-form";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
 
+
 const JobForm = ({ onSubmit,...props}) => {
+
+  
 
   const navigation = useNavigation()
   const {
@@ -125,22 +128,23 @@ const JobForm = ({ onSubmit,...props}) => {
       <CustomInput
         fontSize={scale(16)}
         onCameraPress = {props.onCameraPress}
-        editable={false}
+        // editable={false}
         camera = {true}
         size = {scale(18)}
         control={control}
         name="images"
-        rules={{
-          required: "Please add image",
-        }}
+        // rules={{
+        //   required: "Please add image",
+        // }}
         maxLength={20}
         placeholder={"Multiple Images"}
       />
-      {errors.images && <Error text={errors.images.message} />}
+     
 
       <CustomInput
         fontSize={scale(16)}
         control={control}
+        // editable={false}
         video = {true}
         size = {scale(18)}
         onVideoPress = {props.onVideoPress}
@@ -151,7 +155,7 @@ const JobForm = ({ onSubmit,...props}) => {
         maxLength={20}
         placeholder={"Multiple Videos"}
       />
-      {errors.videos && <Error text={errors.videos.message} />}
+     
 
      
       <CustomInput
