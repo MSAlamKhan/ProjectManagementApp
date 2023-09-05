@@ -36,7 +36,7 @@ const BackIcon = (props) => {
         }}
       >
         <MaterialIcons
-          name={"arrow-back-ios-new"}
+          name={"arrow-back-ios"}
           color={Colors.White}
           size={scale(20)}
           style={{ alignSelf: "center" }}

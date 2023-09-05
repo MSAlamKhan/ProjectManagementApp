@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
   InputStyles: {
     flex: 1,
     color: Colors.White,
+    height:scale(40),
     fontFamily: Font.AnekBangla500,
     top: 0.5,
     paddingHorizontal: moderateScale(10),

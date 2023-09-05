@@ -37,6 +37,32 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fonts/AntDesign.ttf</string>
+		<string>fonts/Entypo.ttf</string>
+		<string>fonts/EvilIcons.ttf</string>
+		<string>fonts/Feather.ttf</string>
+		<string>fonts/FontAwesome.ttf</string>
+		<string>fonts/FontAwesome5_Brands.ttf</string>
+		<string>fonts/FontAwesome5_Regular.ttf</string>
+		<string>fonts/FontAwesome5_Solid.ttf</string>
+		<string>fonts/Foundation.ttf</string>
+		<string>fonts/Ionicons.ttf</string>
+		<string>fonts/MaterialCommunityIcons.ttf</string>
+		<string>fonts/MaterialIcons.ttf</string>
+		<string>fonts/Octicons.ttf</string>
+		<string>fonts/SimpleLineIcons.ttf</string>
+		<string>fonts/Zocial.ttf</string>
+		<string>fonts/Fontisto.ttf</string>
+		<string>fonts/E-SQUARE_demo.otf</string>
+		<string>fonts/AnekBangla-Bold.ttf</string>
+		<string>fonts/AnekBangla-Light.ttf</string>
+		<string>fonts/AnekBangla-Medium.ttf</string>
+		<string>fonts/AnekBangla-Regular.ttf</string>
+		<string>fonts/AnekBangla-Thin.ttf</string>
+		<string>fonts/AnekBangla-SemiBold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
