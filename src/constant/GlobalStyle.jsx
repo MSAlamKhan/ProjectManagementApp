@@ -7,8 +7,8 @@ import {
 
 import { Font } from "../utils/font";
 import { Colors } from "../utils/Color";
-
-export const GlobalStyle = {
+import { StyleSheet } from "react-native";
+export const GlobalStyle = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: Colors.White,
@@ -21,7 +21,10 @@ export const GlobalStyle = {
     flex: 1,
     backgroundColor: "#F3F6FF",
   },
-
+  Image: {
+    width: "100%",
+    height: "100%",
+  },
   GreyBox: {
     borderTopLeftRadius: scale(20),
     borderTopRightRadius: scale(20),
@@ -141,4 +144,4 @@ export const GlobalStyle = {
     borderWidth: scale(1),
     borderColor: Colors.placeholderTextColor,
   },
-};
+});

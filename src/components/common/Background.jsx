@@ -1,22 +1,29 @@
-import { StyleSheet, Text, View,ImageBackground,SafeAreaView, StatusBar } from 'react-native'
-import React from 'react'
-import { GlobalStyle } from '../../constant/GlobalStyle'
-import { Color } from '../../utils/Color'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
+import React from "react";
+import { GlobalStyle } from "../../constant/GlobalStyle";
+import { Colors } from "../../utils/Color";
 
-const Background = (props) => {
+const Background = ({ children }) => {
   return (
-    <>
-   {/* <StatusBar translucent/> */}
-     <ImageBackground
-     source={require('../../assets/images/overboard.png')}
-     style={{flex:1,width:'100%'}}
-     >
-        {props.children}
-     </ImageBackground>
-     </>
-  )
-}
+    <View style={{ flex: 1, backgroundColor: Colors.Main }}>
+      <StatusBar translucent backgroundColor={Colors.Non} />
+      <ImageBackground
+        source={require("../../assets/images/Lee-background.png")}
+        style={GlobalStyle.Image}
+      >
+        {children}
+      </ImageBackground>
+    </View>
+  );
+};
 
-export default Background
+export default Background;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

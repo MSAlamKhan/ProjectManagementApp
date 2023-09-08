@@ -7,7 +7,7 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Background from "../../components/common/Background";
 import CustomInput from "../../components/common/Inputs/CustomInput";
 import { useForm } from "react-hook-form";
@@ -22,9 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGN_IN } from "../../redux/reducer/Holder";
 
 const Signin = () => {
-
   const [isVisible, setVisible] = useState(true);
-  const windowHeight = Dimensions.get("window").height;
+  const { height } = Dimensions.get("window");
   const signIn = useSelector((state) => state.isSignin);
   const dispatch = useDispatch();
   const {
@@ -40,12 +39,9 @@ const Signin = () => {
   };
   return (
     <Background>
-      {/* <BackIcon /> */}
-      <View style={{ height: windowHeight * 0.2 }} />
+      <View style={{ height: height * 0.2 }} />
 
       <View style={[GlobalStyle.ph20flex]}>
-
-
         <View style={{ justifyContent: "center" }}>
           <View>
             <Text style={GlobalStyle.BlueText}>Welcome,</Text>
@@ -53,7 +49,7 @@ const Signin = () => {
           </View>
           <CustomInput
             fontSize={scale(16)}
-            MaterialIcons={true}
+            MaterialIcons
             size={scale(18)}
             MaterialIcons_Name="email"
             control={control}
@@ -76,13 +72,13 @@ const Signin = () => {
           )}
 
           <CustomInput
-            password={true}
+            password
             fontSize={scale(16)}
-            Feather={true}
+            Feather
             size={scale(18)}
-            secureTextEntry = {isVisible ? true : false}
-            isVisible = {isVisible}
-            onPassPress = {() => setVisible(!isVisible)}
+            secureTextEntry={isVisible ? true : false}
+            isVisible={isVisible}
+            onPassPress={() => setVisible(!isVisible)}
             Feather_Name={"lock"}
             control={control}
             maxLength={20}
@@ -121,23 +117,22 @@ const Signin = () => {
         <View
           style={{
             alignItems: "flex-end",
-          }}>
+          }}
+        >
           <View
             style={{
               height: verticalScale(250),
               width: scale(204),
-
             }}
           >
             <Image
               source={require("../../assets/images/logo.png")}
-              style={{ height: "100%", width: "100%" }}
+              style={GlobalStyle.Image}
               resizeMode="contain"
             />
           </View>
         </View>
       </View>
-
     </Background>
   );
 };

@@ -37,9 +37,10 @@ const SaleNavigator = () => {
           tabBarActiveTintColor: Colors.Black,
           tabBarInactiveTintColor: Colors.BottomIcon,
           tabBarStyle: {
-            height: verticalScale(65),
+            height: verticalScale(60),
             paddingTop: verticalScale(10),
             paddingBottom: verticalScale(2),
+            backgroundColor: "#E3EFFC",
           },
         }}
       >
@@ -53,12 +54,11 @@ const SaleNavigator = () => {
             },
             tabBarLabel: "Home",
 
-            tabBarIcon: ({ color, size }) => (
+            tabBarIcon: ({ color }) => (
               <Octicons name={"home"} color={color} size={scale(26)} />
             ),
           }}
         />
-      
 
         <Tab.Screen
           name="Notification"
@@ -113,7 +113,6 @@ function AllHome() {
     </Stack.Navigator>
   );
 }
-
 
 function AllNotification() {
   return (

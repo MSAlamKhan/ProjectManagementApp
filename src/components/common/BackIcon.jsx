@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../utils/Color";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Entypo from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { Font } from "../../utils/font";
 const BackIcon = (props) => {
@@ -19,35 +19,33 @@ const BackIcon = (props) => {
         paddingHorizontal: moderateScale(20),
         flexDirection: "row",
         alignItems: "center",
-        
       }}
     >
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={{
           backgroundColor: Colors.Blue,
-          borderRadius: scale(30),
-          // padding: scale(5),
           alignItems: "center",
           justifyContent: "center",
           width: scale(36),
           height: scale(36),
           marginVertical: verticalScale(20),
+          borderRadius: 100,
+          marginTop: StatusBar.currentHeight,
         }}
       >
-        <MaterialIcons
-          name={"arrow-back-ios"}
+        <Entypo
+          name="chevron-small-left"
           color={Colors.White}
-          size={scale(20)}
-          style={{ alignSelf: "center" }}
+          size={scale(30)}
         />
       </TouchableOpacity>
 
-      {props.title ? (
+      {props.title && (
         <View style={styles.TextView}>
           <Text style={styles.Text}>{props.title}</Text>
         </View>
-      ) : null}
+      )}
     </View>
   );
 };

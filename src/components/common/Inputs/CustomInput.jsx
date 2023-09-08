@@ -39,42 +39,42 @@ const CustomInput = forwardRef((props, ref) => {
       ) : null}
 
       <View style={[styles.smallbox, props.boxStyle]}>
-        {props.FontAwesome ? (
+        {props.FontAwesome && (
           <FontAwesome
             name={props.FontAwesome_Name}
             size={props.size}
             color={props.iconcolor ? props.iconcolor : Colors.IconColor}
           />
-        ) : null}
+        )}
 
-        {props.IonIcons ? (
+        {props.IonIcons && (
           <IonIcons
             name={props.IonIcons_Name}
             size={props.size}
             color={props.iconcolor ? props.iconcolor : Colors.IconColor}
           />
-        ) : null}
-        {props.MaterialIcons ? (
+        )}
+        {props.MaterialIcons && (
           <MaterialIcons
             name={props.MaterialIcons_Name}
             size={props.size}
             color={props.iconcolor ? props.iconcolor : Colors.IconColor}
           />
-        ) : null}
-        {props.Feather ? (
+        )}
+        {props.Feather && (
           <Feather
             name={props.Feather_Name}
             size={props.size}
             color={props.iconcolor ? props.iconcolor : Colors.IconColor}
           />
-        ) : null}
-        {props.Fontisto ? (
+        )}
+        {props.Fontisto && (
           <Fontisto
             name={props.Fontisto_Name}
             size={props.size}
             color={props.iconcolor ? props.iconcolor : Colors.IconColor}
           />
-        ) : null}
+        )}
         <TextInput
           onFocus={props.onFocus}
           textContentType={props.textContentType}
@@ -94,9 +94,9 @@ const CustomInput = forwardRef((props, ref) => {
           placeholderStyle={props.placeholderStyle}
           fontSize={props.fontSize}
           maxLength={props.maxLength}
-          editable = {props.editable}
+          editable={props.editable}
         />
-        {props.search ? (
+        {props.search && (
           <Feather
             name={"search"}
             onPress={props.onPressLocation}
@@ -104,8 +104,8 @@ const CustomInput = forwardRef((props, ref) => {
             color={props.iconcolor ? props.iconcolor : Colors.SearchBar}
             style={{ alignSelf: "center", marginRight: moderateScale(10) }}
           />
-        ) : null}
-        {props.send ? (
+        )}
+        {props.send && (
           <TouchableOpacity>
             <Feather
               name={"send"}
@@ -114,9 +114,9 @@ const CustomInput = forwardRef((props, ref) => {
               style={{ alignSelf: "center", marginRight: moderateScale(10) }}
             />
           </TouchableOpacity>
-        ) : null}
+        )}
 
-        {props.camera ? (
+        {props.camera && (
           <TouchableOpacity onPress={props.onCameraPress}>
             <MaterialCommunityIcons
               name={"camera-plus-outline"}
@@ -125,9 +125,9 @@ const CustomInput = forwardRef((props, ref) => {
               style={{ alignSelf: "center", marginRight: moderateScale(10) }}
             />
           </TouchableOpacity>
-        ) : null}
+        )}
 
-        {props.video ? (
+        {props.video && (
           <TouchableOpacity onPress={props.onVideoPress}>
             <MaterialCommunityIcons
               name={"movie-plus-outline"}
@@ -136,19 +136,15 @@ const CustomInput = forwardRef((props, ref) => {
               style={{ alignSelf: "center", marginRight: moderateScale(10) }}
             />
           </TouchableOpacity>
-        ) : null}
-        {props.password == true ? (
+        )}
+        {props.password && (
           <MaterialCommunityIcons
             name={props.isVisible ? "eye-off-outline" : "eye-outline"}
             size={scale(18)}
             color={Colors.IconColor}
             onPress={props.onPassPress}
-            // style={{
-            //   alignSelf: 'center',
-            //   marginLeft: '5%',
-            // }}
           />
-        ) : null}
+        )}
       </View>
     </>
   );
@@ -163,7 +159,7 @@ const styles = StyleSheet.create({
   InputStyles: {
     flex: 1,
     color: Colors.White,
-    height:scale(40),
+    height: scale(40),
     fontFamily: Font.AnekBangla500,
     top: 0.5,
     paddingHorizontal: moderateScale(10),
