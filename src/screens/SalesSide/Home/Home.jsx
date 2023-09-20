@@ -12,14 +12,14 @@ import CustomButton from "../../../components/common/Button/CustomButton";
 const Home = ({ navigation }) => {
   const windowHeight = Dimensions.get("window").height;
   card_data = [
-    { id: 1, total: "Total Number of Project", amount: "7", color: "#0077B6" },
+    { id: 1, total: "Total Number of Project", amount: "7",color: "#1E90FF"  },
     {
       id: 2,
       total: "Total Projects underprogress",
       amount: "7",
       color: "#FFAD41",
     },
-    { id: 3, total: "Total completed Projects", amount: "7", color: "#1E90FF" },
+    { id: 3, total: "Total completed Projects", amount: "7", color: "#0077B6" },
   ];
   return (
     <Background>

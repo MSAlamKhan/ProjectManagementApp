@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Background from '../../../components/common/Background'
 import BackIcon from '../../../components/common/BackIcon'
@@ -8,6 +8,7 @@ import TaskCard from '../../../components/common/Cards/TaskCard'
 
 const TaskScreen = () => {
     return (
+        <SafeAreaView style={GlobalStyle.safeAreaStyle}>
         <Background>
             <BackIcon />
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -19,6 +20,8 @@ const TaskScreen = () => {
                 </View>
             </ScrollView>
         </Background>
+
+        </SafeAreaView>
     )
 }
 

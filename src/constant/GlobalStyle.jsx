@@ -9,6 +9,8 @@ import { Font } from "../utils/font";
 import { Colors } from "../utils/Color";
 import { StyleSheet } from "react-native";
 export const GlobalStyle = StyleSheet.create({
+  safeAreaStyle: { flex: 1, backgroundColor: "#97C1F2" },
+
   Container: {
     flex: 1,
     backgroundColor: Colors.White,

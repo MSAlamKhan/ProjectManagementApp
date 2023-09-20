@@ -12,15 +12,15 @@ import CustomButton from "../../../components/common/Button/CustomButton";
 const Home = ({ navigation }) => {
   const windowHeight = Dimensions.get("window").height;
   card_data = [
-    { id: 1, total: "Total Job assigned", amount: "9", color: "#0077B6" },
-    {
-      id: 2,
-      total: "Total number of pending jobs",
-      amount: "7",
-      color: "#FFAD41",
-    },
-    { id: 3, total: "Total completed submissions", amount: "7", color: "#1E90FF" },
-    { id: 4, total: "Total number of job delivered late", amount: "7", color: "#1E90FF" },
+    { id: 1, total: "Total Job assigned", amount: "9", color: "#0077B6", onPress:()=> navigation.navigate("calendar") },
+    // {
+    //   id: 2,
+    //   total: "Total number of pending jobs",
+    //   amount: "7",
+    //   color: "#FFAD41",
+    // },
+    { id: 3, total: "Total completed submissions", amount: "7", color: "#1E90FF" , onPress:() => null},
+    { id: 4, total: "Total number of job delivered late", amount: "7", color: "#1E90FF", onPress:()=> null },
   ];
   return (
     <Background>
@@ -41,6 +41,7 @@ const Home = ({ navigation }) => {
                   total={item.total}
                   color={item.color}
                   amount={item.amount}
+                  onPress={item.onPress}
                 />
               );
             })}

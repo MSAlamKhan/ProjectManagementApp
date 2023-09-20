@@ -46,7 +46,7 @@ export default JobCard;
 
 const styles = StyleSheet.create({
   Main: {
-    backgroundColor: Colors.Main,
+    backgroundColor: Colors.White,
     borderRadius: scale(10),
     paddingHorizontal: moderateScale(10),
     paddingVertical: verticalScale(10),

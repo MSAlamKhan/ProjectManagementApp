@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Background from '../../../components/common/Background'
 import BackIcon from '../../../components/common/BackIcon'
@@ -15,6 +15,8 @@ const CompletedJob = ({route}) => {
         {id:2,complete_date:'2/2/23',job_title:'Redesign Lounge',description:'tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra'},
     ]
   return (
+    <SafeAreaView style={GlobalStyle.safeAreaStyle}>
+
     <Background>
         <BackIcon title = {'Task Details'}/>
       <View style={GlobalStyle.ph20flex}>
@@ -33,6 +35,7 @@ const CompletedJob = ({route}) => {
 
       </View>
     </Background>
+    </SafeAreaView>
   )
 }
 

@@ -4,6 +4,7 @@ import {
   View,
   Platform,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import Background from "../../components/common/Background";
@@ -21,6 +22,7 @@ const Setting = ({navigation}) => {
     dispatch({ type: IS_SIGN_IN, payload: null });
   };
   return (
+    <SafeAreaView style={GlobalStyle.safeAreaStyle}>
     <Background>
       <BackIcon />
 
@@ -49,6 +51,8 @@ const Setting = ({navigation}) => {
         </TouchableOpacity>
       </View>
     </Background>
+
+    </SafeAreaView>
   );
 };
 

@@ -5,6 +5,7 @@ import {
   View,
   Image,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import Background from "../../components/common/Background";
@@ -64,6 +65,7 @@ const ProfileEdit = () => {
     });
   };
   return (
+    <SafeAreaView style={GlobalStyle.safeAreaStyle}>
     <Background>
       <BackIcon />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -268,6 +270,8 @@ const ProfileEdit = () => {
         Title={"Profile Updated!"}
       />
     </Background>
+
+    </SafeAreaView>
   );
 };
 

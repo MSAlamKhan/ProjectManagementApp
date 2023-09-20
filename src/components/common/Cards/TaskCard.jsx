@@ -63,7 +63,7 @@ export default TaskCard;
 
 const styles = StyleSheet.create({
   Main: {
-    backgroundColor: Colors.Black,
+    backgroundColor: Colors.White,
     paddingHorizontal: moderateScale(20),
     paddingVertical: verticalScale(15),
     overflow: "hidden",
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   Detail: {
     fontFamily: Font.AnekBangla500,
     fontSize: scale(14),
-    color: Colors.White,
+    color: Colors.Black,
     marginLeft: moderateScale(15),
     maxWidth: "80%",
   },

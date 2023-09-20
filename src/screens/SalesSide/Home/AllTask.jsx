@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import TaskCard from '../../../components/common/Cards/TaskCard'
 import Background from '../../../components/common/Background'
@@ -11,6 +11,7 @@ const {type,time} = route.params;
   console.log('type dekhle',type)
   console.log('time', time)
   return (
+    <SafeAreaView style={GlobalStyle.safeAreaStyle}>
     <Background>
         <BackIcon/>
 
@@ -19,6 +20,8 @@ const {type,time} = route.params;
       <TaskCard  onPress = {()=>navigation.navigate('completejob',{type:type,time:time})} />
         </View>
     </Background>
+
+    </SafeAreaView>
   )
 }
 

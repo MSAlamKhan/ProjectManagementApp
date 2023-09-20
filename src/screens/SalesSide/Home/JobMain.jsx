@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Background from '../../../components/common/Background'
 import BackIcon from '../../../components/common/BackIcon'
@@ -12,18 +12,18 @@ import { useSelector } from 'react-redux'
 
 const JobMain = ({ navigation }) => {
     sample = [
-        { id: 1, description: 'Hello' },
-        { id: 2, description: 'Hello' },
-        { id: 3, description: 'Hello' }, { id: 4, description: 'Hello' },
-        { id: 5, description: 'Hello' },
+        { id: 1, description: 'Demo' },
+        { id: 2, description: 'Plumbing' },
+        { id: 3, description: 'Framing' }, { id: 4, description: 'Hello' },
+        { id: 5, description: 'Electrical' },
 
     ]
-
+    
     complete = [
-        { id: 1, description: 'Hello', time: 'ontime' },
-        { id: 2, description: 'Hello', time: 'ontime' },
-        { id: 3, description: 'Hello', time: 'ontime' }, { id: 4, description: 'Hello', time: 'late' },
-        { id: 5, description: 'Hello', time: 'late' },
+        { id: 1, description: 'Tile', time: 'ontime' },
+        { id: 2, description: 'Drywall', time: 'ontime' },
+        { id: 3, description: 'Paint', time: 'ontime' }, { id: 4, description: 'Hello', time: 'late' },
+        { id: 5, description: 'Plumbing', time: 'late' },
 
     ]
 
@@ -33,13 +33,16 @@ const JobMain = ({ navigation }) => {
 
 
     return (
+        <SafeAreaView style={GlobalStyle.safeAreaStyle}>
+
+        
         <Background>
             <BackIcon />
 
             <View style={GlobalStyle.ph20flex}>
                 
               {inProgress.map((gand,index)=>
-                <Text>gand.email</Text>
+                <Text style={{color:'red'}}>gand.email</Text>
               )}
 
                 <MenuSelectComponent
@@ -47,7 +50,7 @@ const JobMain = ({ navigation }) => {
                     menuSecond={'In Progress'}
                     menuThird={'Completed'}
                     firstData={sample}
-                    secondData={inProgress}
+                    secondData={sample}
                     thirdData={complete}
 
                 />
@@ -58,6 +61,7 @@ const JobMain = ({ navigation }) => {
             <View style={GlobalStyle.Height} />
 
         </Background>
+        </SafeAreaView>
     )
 }
 

@@ -84,7 +84,7 @@ const CustomInput = forwardRef((props, ref) => {
           multiline={props.multiline}
           numberOfLines={props.numberOfLines}
           placeholder={props.placeholder}
-          placeholderTextColor={Colors.placeholderTextColor}
+          placeholderTextColor={Colors.Black}
           style={[styles.InputStyles, props.restyle]}
           secureTextEntry={props.secureTextEntry}
           keyboardType={props.keyboardType}
@@ -158,20 +158,20 @@ const styles = StyleSheet.create({
   },
   InputStyles: {
     flex: 1,
-    color: Colors.White,
-    height: scale(40),
+    color: Colors.Black,
+    height: scale(50),
     fontFamily: Font.AnekBangla500,
     top: 0.5,
     paddingHorizontal: moderateScale(10),
   },
   smallbox: {
-    backgroundColor: Colors.Black,
+    backgroundColor: Colors.White,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.White,
     borderRadius: scale(8),
-    // paddingVertical: 8,
+    paddingVertical: 8,
     paddingHorizontal: moderateScale(10),
     marginTop: verticalScale(10),
   },

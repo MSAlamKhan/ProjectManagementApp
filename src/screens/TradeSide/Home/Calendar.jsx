@@ -6,6 +6,7 @@ import { GlobalStyle } from "../../../constant/GlobalStyle";
 import { Colors } from "../../../utils/Color";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import {
+    SafeAreaView,
     ScrollView,
     StyleSheet,
     Text,
@@ -16,11 +17,15 @@ import { Font } from "../../../utils/font";
 import OnGoingCard from "../../../components/common/Cards/OnGoingCard";
 
 const Calendar = ({navigation}) => {
-
+    // 
+    // 
+    // 
+    // Install shower pan
+    // Water Test pan
     const task_details = [
-        { id: 1, name: 'House Remodeling', backgroundColor: '#FFB017' },
-        { id: 2, name: 'House Remodeling', backgroundColor: '#42CF96' },
-        { id: 3, name: 'House Remodeling', backgroundColor: '#E48FFF' },
+        { id: 1, name: 'Remove toilet', backgroundColor: '#FFB017', jobNumber : 1, address : "test address 1", contact:"123123123" },
+        { id: 2, name: 'Intstall shower valve', backgroundColor: '#42CF96', jobNumber : 2, address : "test address 2", contact:"123123123" },
+        { id: 3, name: 'Install shower drain', backgroundColor: '#E48FFF', jobNumber : 3, address : "test address 3", contact:"123123123" },
      
     ]
 
@@ -42,6 +47,8 @@ const Calendar = ({navigation}) => {
     }
 
     return (
+        <SafeAreaView style={GlobalStyle.safeAreaStyle}>
+
         <Background>
             <BackIcon />
 
@@ -57,12 +64,12 @@ const Calendar = ({navigation}) => {
                                 styles.dateBox,
                                 {
                                     backgroundColor:
-                                        dateSelect == index ? Colors.DateSelect : Colors.Black,
+                                        dateSelect == index ? Colors.DateSelect : Colors.White,
                                 },
                             ]}
                         >
-                            <Text style={styles.date}>{item.date}</Text>
-                            <Text style={styles.day}>{item.day}</Text>
+                            <Text style={[styles.date,{color: dateSelect == index ?  Colors.White :Colors.Black }]}>{item.date}</Text>
+                            <Text style={[styles.day,{color: dateSelect == index ?  Colors.White :Colors.Black }]}>{item.day}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -70,7 +77,7 @@ const Calendar = ({navigation}) => {
 
             <View style={styles.TaskMain}>
 
-                <Text style={GlobalStyle.BlackText  }>Ongoing</Text>
+                <Text style={GlobalStyle.BlackText}>Ongoing</Text>
 
                 {task_details.map((details,index)=>{
                     return(
@@ -82,6 +89,7 @@ const Calendar = ({navigation}) => {
             </View>
             </ScrollView>
         </Background>
+        </SafeAreaView>
     );
 };
 

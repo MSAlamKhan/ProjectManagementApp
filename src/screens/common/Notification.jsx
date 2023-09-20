@@ -5,7 +5,6 @@ import Background from "../../components/common/Background";
 import BackIcon from "../../components/common/BackIcon";
 import NotificationCard from "../../components/common/NotificationCard";
 
-
 const Notification = () => {
   const notification_data = [
     {
@@ -15,35 +14,34 @@ const Notification = () => {
       description:
         "tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac",
       time: "10h ago",
-      
     },
     {
       id: 2,
       title: "Interview Calls",
-      description: "tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac",
+      description:
+        "tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac",
       time: "10h ago",
-      
     },
     {
       id: 3,
       title: "Apply Success",
-      description: "tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac",
+      description:
+        "tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac",
       time: "10h ago",
-      
     },
   ];
 
-
-
   return (
-    <Background>
-      <BackIcon />
-      <ScrollView>
-        <View style={GlobalStyle.ph20}>
-          <NotificationCard notification_data={notification_data} />
-        </View>
-      </ScrollView>
-    </Background>
+    <SafeAreaView style={GlobalStyle.safeAreaStyle}>
+      <Background>
+        <BackIcon />
+        <ScrollView>
+          <View style={GlobalStyle.ph20}>
+            <NotificationCard notification_data={notification_data} />
+          </View>
+        </ScrollView>
+      </Background>
+    </SafeAreaView>
   );
 };
 

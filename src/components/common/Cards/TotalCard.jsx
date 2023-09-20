@@ -5,9 +5,9 @@ import { GlobalStyle } from '../../../constant/GlobalStyle'
 import { Font } from '../../../utils/font'
 import { Colors } from '../../../utils/Color'
 
-const TotalCard = ({total,amount,color}) => {
+const TotalCard = ({total,amount,color, onPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} style={[styles.Main,{backgroundColor:color}]}>
+    <TouchableOpacity activeOpacity={0.7} style={[styles.Main,{backgroundColor:color}]} onPress={onPress}>
       <Text style={[GlobalStyle.SimpleText,{textAlign:'center'}]}>{total}</Text>
       <View style={styles.AmountView}>
         <Text style={styles.AmountText}>{amount}</Text>
