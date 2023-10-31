@@ -19,13 +19,17 @@ import { Colors } from "../../utils/Color";
 import CustomButton from "../../components/common/Button/CustomButton";
 import Error from "../../components/common/Error";
 import { useDispatch, useSelector } from "react-redux";
-import { IS_SIGN_IN } from "../../redux/reducer/Holder";
+import { IS_SIGN_IN } from "../../redux/reducer";
+import { LoginApi } from "../../redux/actions/AuthAction";
 
-const Signin = () => {
-  const [isVisible, setVisible] = useState(true);
-  const { height } = Dimensions.get("window");
-  const signIn = useSelector((state) => state.isSignin);
+const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const { height } = Dimensions.get("window");
+
+  const [isVisible, setVisible] = useState(true);
+  const [loading, setLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -33,9 +37,10 @@ const Signin = () => {
   } = useForm({ mode: "all" });
 
   const onSubmit = (data) => {
-    console.log("data", data);
-    dispatch({ type: IS_SIGN_IN, payload: data.email });
-    console.log("signIn", signIn);
+    // console.log("data", data);
+    dispatch(LoginApi(data, setLoading));
+    // dispatch({ type: IS_SIGN_IN, payload: data.email });
+    // console.log("signIn", signIn);
   };
   return (
     <Background>
@@ -103,11 +108,15 @@ const Signin = () => {
             />
           )}
 
-          <TouchableOpacity style={styles.Forgot}>
+          <TouchableOpacity
+            style={styles.Forgot}
+            onPress={() => navigation.navigate("forgotpass")}
+          >
             <Text style={styles.ForgotText}>Forgot Password?</Text>
           </TouchableOpacity>
 
           <CustomButton
+            loader={loading}
             title={"Sign in"}
             containerRestyle={{ marginTop: verticalScale(10) }}
             onPress={handleSubmit(onSubmit)}

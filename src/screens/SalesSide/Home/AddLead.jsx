@@ -8,7 +8,7 @@ import CustomButton from "../../../components/common/Button/CustomButton";
 import { verticalScale } from "react-native-size-matters";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { JOB_DATA } from "../../../redux/reducer/Holder";
+import { JOB_DATA } from "../../../redux/reducer";
 import CustomLotti from "../../../components/common/Modals/CustomLotti";
 
 const AddLead = ({ navigation, route }) => {

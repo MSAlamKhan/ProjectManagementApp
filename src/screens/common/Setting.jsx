@@ -15,43 +15,47 @@ import { Colors } from "../../utils/Color";
 import { Font } from "../../utils/font";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useDispatch } from "react-redux";
-import { IS_SIGN_IN } from "../../redux/reducer/Holder";
-const Setting = ({navigation}) => {
+import { IS_SIGN_IN } from "../../redux/reducer";
+
+const Setting = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch({ type: IS_SIGN_IN, payload: null });
   };
   return (
     <SafeAreaView style={GlobalStyle.safeAreaStyle}>
-    <Background>
-      <BackIcon />
+      <Background>
+        <BackIcon />
 
-      <View style={GlobalStyle.ph20flex}>
-        <TouchableOpacity onPress={()=>navigation.navigate('profileedit')} activeOpacity={0.7} style={styles.Box}>
-          <Text style={styles.Text}>Profile Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
-          <Text style={styles.Text}>Terms and Conditions</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
-          <Text style={styles.Text}>Help</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleLogout}
-          activeOpacity={0.7}
-          style={styles.Box}
-        >
-          <Text style={styles.Text}>Logout</Text>
+        <View style={GlobalStyle.ph20flex}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("profileedit")}
+            activeOpacity={0.7}
+            style={styles.Box}
+          >
+            <Text style={styles.Text}>Profile Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
+            <Text style={styles.Text}>Terms and Conditions</Text>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
+            <Text style={styles.Text}>Help</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleLogout}
+            activeOpacity={0.7}
+            style={styles.Box}
+          >
+            <Text style={styles.Text}>Logout</Text>
 
-          <MaterialIcons
-            name={"logout"}
-            size={scale(20)}
-            color={Colors.IconColor}
-          />
-        </TouchableOpacity>
-      </View>
-    </Background>
-
+            <MaterialIcons
+              name={"logout"}
+              size={scale(20)}
+              color={Colors.IconColor}
+            />
+          </TouchableOpacity>
+        </View>
+      </Background>
     </SafeAreaView>
   );
 };
