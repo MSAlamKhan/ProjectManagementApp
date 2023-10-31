@@ -15,12 +15,15 @@ import { Colors } from "../../utils/Color";
 import { Font } from "../../utils/font";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useDispatch } from "react-redux";
-import { IS_SIGN_IN } from "../../redux/reducer";
+import { IS_SIGN_IN, USER_DETAILS } from "../../redux/reducer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Setting = ({ navigation }) => {
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch({ type: IS_SIGN_IN, payload: null });
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("user_details");
+    // dispatch({ type: IS_SIGN_IN, payload: null });
+    dispatch({ type: USER_DETAILS, payload: null });
   };
   return (
     <SafeAreaView style={GlobalStyle.safeAreaStyle}>

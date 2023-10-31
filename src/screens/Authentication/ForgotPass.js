@@ -21,6 +21,7 @@ import Error from "../../components/common/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGN_IN } from "../../redux/reducer";
 import { ForgotPassApi, LoginApi } from "../../redux/actions/AuthAction";
+import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 
 const ForgotPass = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const ForgotPass = ({ navigation }) => {
     const { height } = Dimensions.get("window");
 
     const [loading, setLoading] = useState(false);
+    const [check, setCheck] = useState(false);
 
     const {
         control,
@@ -37,7 +39,7 @@ const ForgotPass = ({ navigation }) => {
 
     const onSubmit = (data) => {
         // ForgotPassApi(data, setLoading, navigation)
-        dispatch(ForgotPassApi(data, setLoading, navigation));
+        dispatch(ForgotPassApi(data, setLoading, navigation, '', setCheck));
     };
     return (
         <Background>
@@ -106,6 +108,14 @@ const ForgotPass = ({ navigation }) => {
                     </View>
                 </View>
             </View>
+
+
+            <IncorrectModal
+                text={"Email not found"}
+                onPress={() => setCheck(false)}
+                onBackdropPress={() => setCheck(false)}
+                isVisible={check}
+            />
         </Background>
     )
 }

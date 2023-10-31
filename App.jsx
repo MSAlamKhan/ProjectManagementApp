@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import AuthNavigator from "./src/navigation/AuthNavigator";
 import TradeNavigator from "./src/navigation/TradeNavigator";
 import SaleNavigator from "./src/navigation/SaleNavigator";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Splash from "./src/screens/Splash/SplashScreen";
+import { USER_DETAILS } from "./src/redux/reducer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import OneSignal from "react-native-onesignal";
 
 const App = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const userData = useSelector((state) => state.isSignin);
   const userDetails = useSelector((state) => state.userDetails);
@@ -33,6 +36,19 @@ const App = () => {
   //     }
   //   });
   // }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    const data = await AsyncStorage.getItem("user_details");
+    const cnvrtData = JSON.parse(data);
+
+    if (cnvrtData) {
+      dispatch({ type: USER_DETAILS, payload: cnvrtData });
+    }
+  };
 
   setTimeout(() => {
     setLoading(false);

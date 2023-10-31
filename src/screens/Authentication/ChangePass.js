@@ -23,6 +23,7 @@ import Error from "../../components/common/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGN_IN } from "../../redux/reducer";
 import { ChangePassApi, LoginApi } from "../../redux/actions/AuthAction";
+import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 
 const ChangePass = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const ChangePass = ({ navigation, route }) => {
     const [isVisible, setVisible] = useState(true);
     const [isVisible2, setVisible2] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [check, setCheck] = useState(false);
 
     const {
         control,
@@ -45,7 +47,7 @@ const ChangePass = ({ navigation, route }) => {
             // alert(data)
             ChangePassApi(data, userData, setLoading, navigation, ToastAndroid)
         } else {
-            alert('Password do not match')
+            setCheck(true)
         }
         // console.log("data", data);
         // dispatch(LoginApi(data, setLoading));
@@ -155,6 +157,13 @@ const ChangePass = ({ navigation, route }) => {
                     </View>
                 </View>
             </View>
+
+            <IncorrectModal
+                text={"Password do not match"}
+                onPress={() => setCheck(false)}
+                onBackdropPress={() => setCheck(false)}
+                isVisible={check}
+            />
         </Background>
     )
 }

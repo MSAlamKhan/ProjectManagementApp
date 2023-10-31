@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-export const LoginApi = (data, setLoading) => {
+export const LoginApi = (data, setLoading, setCheck) => {
     return async (dispatch) => {
         try {
             setLoading(true)
@@ -28,7 +28,7 @@ export const LoginApi = (data, setLoading) => {
                 await AsyncStorage.setItem('user_details', JSON.stringify(responseData?.success?.data))
             } else {
                 setLoading(false)
-
+                setCheck(true)
             }
 
         } catch (error) {
@@ -37,7 +37,7 @@ export const LoginApi = (data, setLoading) => {
         }
     }
 }
-export const ForgotPassApi = (data, setLoading, navigation, type) => {
+export const ForgotPassApi = (data, setLoading, navigation, type, setCheck) => {
     return async (dispatch) => {
         try {
             setLoading(true)
@@ -65,7 +65,8 @@ export const ForgotPassApi = (data, setLoading, navigation, type) => {
                 }
             } else {
                 setLoading(false)
-                alert('Email not found')
+                // alert('Email not found')
+                setCheck(true)
             }
 
         } catch (error) {

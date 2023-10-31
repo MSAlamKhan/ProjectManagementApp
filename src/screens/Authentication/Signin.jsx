@@ -21,6 +21,7 @@ import Error from "../../components/common/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGN_IN } from "../../redux/reducer";
 import { LoginApi } from "../../redux/actions/AuthAction";
+import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Signin = ({ navigation }) => {
 
   const [isVisible, setVisible] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const {
     control,
@@ -38,7 +40,7 @@ const Signin = ({ navigation }) => {
 
   const onSubmit = (data) => {
     // console.log("data", data);
-    dispatch(LoginApi(data, setLoading));
+    dispatch(LoginApi(data, setLoading, setCheck));
     // dispatch({ type: IS_SIGN_IN, payload: data.email });
     // console.log("signIn", signIn);
   };
@@ -142,6 +144,13 @@ const Signin = ({ navigation }) => {
           </View>
         </View>
       </View>
+
+      <IncorrectModal
+        text={"Invalid email or password"}
+        onPress={() => setCheck(false)}
+        onBackdropPress={() => setCheck(false)}
+        isVisible={check}
+      />
     </Background>
   );
 };

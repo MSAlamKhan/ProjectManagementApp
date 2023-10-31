@@ -27,6 +27,7 @@ import {
     useBlurOnFulfill,
     useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 
 const OtpScreen = ({ navigation, route }) => {
     const { data } = route.params
@@ -34,6 +35,9 @@ const OtpScreen = ({ navigation, route }) => {
     const otp = useSelector(state => state.otp);
 
     const { height } = Dimensions.get("window");
+
+    const [check, setCheck] = useState(false);
+    const [check2, setCheck2] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState();
@@ -62,22 +66,22 @@ const OtpScreen = ({ navigation, route }) => {
 
 
     const onSubmit = () => {
-        if (value == otp) {
-            navigation.navigate('changepass', {
-                userData: data
-            })
+        if (value) {
+            if (value == otp) {
+                navigation.navigate('changepass', {
+                    userData: data
+                })
+            } else {
+                setCheck2(true)
+            }
         } else {
-            alert('wrong otp')
+            alert('Enter your OTP')
         }
-        // console.log("data", data);
-        // dispatch(LoginApi(data, setLoading));
-        // dispatch({ type: IS_SIGN_IN, payload: data.email });
-        // console.log("signIn", signIn);
     };
 
     const resendOtp = () => {
         setTime(30);
-        dispatch(ForgotPassApi(data, setLoading, navigation, 'resend'));
+        dispatch(ForgotPassApi(data, setLoading, navigation, 'resend', setCheck));
     };
 
     return (
@@ -181,6 +185,13 @@ const OtpScreen = ({ navigation, route }) => {
                     </View>
                 </View>
             </View>
+
+            <IncorrectModal
+                text={"Incorrect OTP!"}
+                onPress={() => setCheck2(false)}
+                onBackdropPress={() => setCheck2(false)}
+                isVisible={check2}
+            />
         </Background>
     )
 }
