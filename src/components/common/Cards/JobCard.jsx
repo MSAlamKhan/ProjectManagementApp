@@ -1,44 +1,76 @@
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../../utils/Color";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
-import Feather from "react-native-vector-icons/Feather";
 import { Font } from "../../../utils/font";
 
-const JobCard = ({ data, onPress, menu, gand }) => {
-
-  const [select, setSelect] = useState(false);
-
-  console.log('menu', menu);
-
+import moment from "moment";
+import Feather from "react-native-vector-icons/Feather";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity, 
+  Platform,
+  Pressable,
+} from "react-native";
+const JobCard = ({ data, onPress, onDone, selected }) => {
   return (
-    <TouchableOpacity activeOpacity={1} onPress={onPress}
-      style={[styles.Main, { borderColor: data.time == 'late'  ? Colors.Red : "#A4A9CE" }]}
+    <Pressable
+      android_ripple={{
+        color: Colors.Red,
+      }}
+      disabled={data?.color != Colors.Red}
+      activeOpacity={1}
+      onPress={onPress}
+      style={[styles.Main, { borderColor: data?.color }]}
     >
       <View style={GlobalStyle.RowBetween}>
-        <Text style={styles.BlackText}>Job no.{data.id}</Text>
-        {data.time == 'late'  ? (
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={[styles.Heading]}>Title:&nbsp;</Text>
+          <Text style={styles.DescText}>{data?.task_title}</Text>
+        </View>
+        {data?.color == Colors.Red && (
           <Feather name={"alert-circle"} size={scale(22)} color={Colors.Red} />
-        ) : null}
+        )}
       </View>
 
-      <Text style={styles.DescText}>{data.description}</Text>
-      <Text style={styles.DescText}>{data.budget}</Text>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>budget:&nbsp;</Text>
+        <Text style={styles.DescText}>{data?.costing}</Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>Start Date:&nbsp;</Text>
+        <Text style={styles.DescText}>
+          {moment(data?.start_date).format("MMM Do YY")}
+        </Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>Dead line:&nbsp;</Text>
+        <Text style={styles.DescText}>
+          {moment(data?.deadline_date).format("MMM Do YY")}
+        </Text>
+      </View>
 
-      {gand == 'trade' && data.time == 'ontime' ?
-        <TouchableOpacity onPress={() => setSelect(true)} style={[styles.DoneBox, { backgroundColor: select ? Colors.Blue : Colors.White }]}>
-          <Text style={[styles.DescText, { color: select ? Colors.White : Colors.Black }]}>
-            DONE
-          </Text>
-
-        </TouchableOpacity>
-
-        :
-
-
-        null}
-    </TouchableOpacity>
+      {data.task_status == "Completed" ? null : (
+          <TouchableOpacity
+            onPress={onDone}
+            style={[
+              styles.DoneBox,
+              { backgroundColor: selected ? Colors.Blue : Colors.White },
+            ]}
+          >
+            <Text
+              style={[
+                styles.DescText,
+                { color: selected ? Colors.White : Colors.Black },
+              ]}
+            >
+              DONE
+            </Text>
+          </TouchableOpacity>
+        )}
+    </Pressable>
   );
 };
 
@@ -46,6 +78,7 @@ export default JobCard;
 
 const styles = StyleSheet.create({
   Main: {
+    overflow: "hidden",
     backgroundColor: Colors.White,
     borderRadius: scale(10),
     paddingHorizontal: moderateScale(10),
@@ -55,7 +88,7 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(15),
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         shadowRadius: 5,
@@ -83,8 +116,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.White,
     paddingVertical: verticalScale(2),
     paddingHorizontal: moderateScale(10),
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+    alignSelf: "flex-end",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  Heading: {
+    color: Colors.Black,
+    fontSize: scale(20),
+    fontFamily: Font.AnekBangla700,
+  },
 });

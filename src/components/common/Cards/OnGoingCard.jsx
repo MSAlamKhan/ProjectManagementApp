@@ -8,27 +8,26 @@ import { GlobalStyle } from "../../../constant/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
 
 const OnGoingCard = ({ data, ...props }) => {
-  const navigation = useNavigation();
   return (
     <TouchableOpacity
-      style={[styles.Main, { backgroundColor: data.backgroundColor }]}
+      style={[styles.Main, { backgroundColor: Colors.DateSelect }]}
       onPress={props.onPress}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={[styles.Heading]}>Title: </Text>
-        <Text style={styles.Title}>{data.name}</Text>
+        <Text style={[styles.Heading]}>Title:&nbsp;</Text>
+        <Text style={styles.Title}>{data.work_scope}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={[styles.Heading]}>Job Number: </Text>
-        <Text style={styles.Title}>{data.jobNumber}</Text>
+        <Text style={[styles.Heading]}>Job Number:&nbsp;</Text>
+        <Text style={styles.Title}>{data.tasks.length}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={[styles.Heading]}>Address: </Text>
-        <Text style={styles.Title}>{data.address}</Text>
+        <Text style={[styles.Heading]}>Address:&nbsp;</Text>
+        <Text style={styles.Title}>{data.task_address}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={[styles.Heading]}>Contact: </Text>
-        <Text style={styles.Title}>{data.contact}</Text>
+        <Text style={[styles.Heading]}>Contact:&nbsp;</Text>
+        <Text style={styles.Title}>{data.phone_number}</Text>
       </View>
       <View style={{ alignSelf: "flex-end", marginTop: verticalScale(5) }}>
         <TouchableOpacity onPress={props.onPress} style={styles.MoreView}>

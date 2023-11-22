@@ -1,30 +1,44 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import TaskCard from '../../../components/common/Cards/TaskCard'
-import Background from '../../../components/common/Background'
-import BackIcon from '../../../components/common/BackIcon'
-import { GlobalStyle } from '../../../constant/GlobalStyle'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GlobalStyle } from "../../../constant/GlobalStyle";
+import { SafeAreaView, StyleSheet, FlatList, View } from "react-native";
 
-const AllTask = ({route,navigation}) => {
-  
-const {type,time} = route.params;
-  console.log('type dekhle',type)
-  console.log('time', time)
+import Empty from "../../../components/common/Cards/Empty";
+import BackIcon from "../../../components/common/BackIcon";
+import Background from "../../../components/common/Background";
+import TaskCard from "../../../components/common/Cards/TaskCard";
+import { show_id_task } from "../../../redux/actions/UserAction";
+
+const AllTask = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.get_lead_task);
+  const onSubmit = (item) => {
+    dispatch(show_id_task(item.id, navigation));
+  };
   return (
     <SafeAreaView style={GlobalStyle.safeAreaStyle}>
-    <Background>
-        <BackIcon/>
-
+      <Background>
+        <BackIcon />
         <View style={GlobalStyle.ph20flex}>
-
-      <TaskCard  onPress = {()=>navigation.navigate('completejob',{type:type,time:time})} />
+          <FlatList
+            data={data}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.id.toString()}
+            ListEmptyComponent={() => <Empty marginTop={"60%"} />}
+            renderItem={({ item, index }) => (
+              <TaskCard
+                data={item}
+                number={index}
+                onPress={() => onSubmit(item)}
+              />
+            )}
+          />
         </View>
-    </Background>
-
+      </Background>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default AllTask
+export default AllTask;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

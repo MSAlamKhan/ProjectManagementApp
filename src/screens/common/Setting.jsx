@@ -38,10 +38,23 @@ const Setting = ({ navigation }) => {
           >
             <Text style={styles.Text}>Profile Edit</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("term", {
+                type: "term",
+              })
+            }
+            activeOpacity={0.7}
+            style={styles.Box}
+          >
             <Text style={styles.Text}>Terms and Conditions</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.Box}>
+          <TouchableOpacity
+           onPress={() =>
+            navigation.navigate("term", {
+              type: "help",
+            })
+          } activeOpacity={0.7} style={styles.Box}>
             <Text style={styles.Text}>Help</Text>
           </TouchableOpacity>
           <TouchableOpacity

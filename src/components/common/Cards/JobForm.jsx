@@ -1,18 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import CustomInput from "../Inputs/CustomInput";
 import Error from "../Error";
 import CustomButton from "../Button/CustomButton";
 import { useForm } from "react-hook-form";
-import { scale, verticalScale } from "react-native-size-matters";
-import { useNavigation } from "@react-navigation/native";
+import { ms, scale, verticalScale } from "react-native-size-matters";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
+import { Colors } from "../../../utils/Color";
+import { SELECTEDDATE } from "../../../redux/reducer";
+import { useDispatch } from "react-redux";
 
+const JobForm = ({ onSubmit, onCameraPress, onVideoPress, type }) => {
+  const dispatch = useDispatch();
+  const [date, setDate] = useState(new Date());
+  const [isDateSelected, setDateSelected] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-const JobForm = ({ onSubmit,...props}) => {
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
-  
+  const formateDate = moment(date).format("yyyy-MM-DD");
 
-  const navigation = useNavigation()
   const {
     control,
     handleSubmit,
@@ -63,13 +73,13 @@ const JobForm = ({ onSubmit,...props}) => {
       <CustomInput
         control={control}
         name="phone"
-        keyboardType={'numeric'}
+        keyboardType={"numeric"}
         rules={{
-          required: 'Phone number is required',
-          message: 'Please enter your phone number',
+          required: "Phone number is required",
+          message: "Please enter your phone number",
           maxLength: {
             value: 15,
-            message: 'Please enter a valid phone number',
+            message: "Please enter a valid phone number",
           },
         }}
         placeholder="Phone Number"
@@ -126,38 +136,35 @@ const JobForm = ({ onSubmit,...props}) => {
       {errors.state && <Error text={errors.state.message} />}
 
       <CustomInput
+        camera
         fontSize={scale(16)}
-        onCameraPress = {props.onCameraPress}
-        // editable={false}
-        camera = {true}
-        size = {scale(18)}
+        onCameraPress={onCameraPress}
+        size={scale(18)}
         control={control}
         name="images"
-        // rules={{
-        //   required: "Please add image",
-        // }}
+        editable={false}
         maxLength={20}
         placeholder={"Multiple Images"}
+        rules={{
+          required: false,
+        }}
       />
-     
 
       <CustomInput
+        video
         fontSize={scale(16)}
         control={control}
-        // editable={false}
-        video = {true}
-        size = {scale(18)}
-        onVideoPress = {props.onVideoPress}
+        editable={false}
+        size={scale(18)}
+        onVideoPress={onVideoPress}
         name="videos"
         rules={{
-          required: "Please add videos",
+          required: false,
         }}
         maxLength={20}
         placeholder={"Multiple Videos"}
       />
-     
 
-     
       <CustomInput
         fontSize={scale(16)}
         control={control}
@@ -182,23 +189,29 @@ const JobForm = ({ onSubmit,...props}) => {
       />
       {errors.budget && <Error text={errors.budget.message} />}
 
-      <CustomInput
-        fontSize={scale(16)}
-        control={control}
-        keyboardType={"numeric"}
-        name="finaldate"
-        rules={{
-          required: "Please select a date",
-        }}
-        maxLength={20}
-        placeholder={"Date of finalization"}
+      <CustomButton
+        containerRestyle={styles.button}
+        textStyle={{ color: Colors.Black }}
+        title={isDateSelected ? formateDate : "Date of finalization"}
+        onPress={() => setDatePickerVisibility(true)}
       />
-      {errors.finaldate && <Error text={errors.finaldate.message} />}
+
+      <DateTimePickerModal
+        mode="date"
+        onCancel={hideDatePicker}
+        isVisible={isDatePickerVisible}
+        onConfirm={(date) => {
+          setDate(date);
+          hideDatePicker();
+          setDateSelected(true);
+          dispatch({ type: SELECTEDDATE, payload: formateDate });
+        }}
+      />
 
       <CustomButton
         containerRestyle={{ marginVertical: verticalScale(10) }}
         onPress={handleSubmit(onSubmit)}
-        title={props.type == 'edit' ? "Save" : "Add"}
+        title={type == "edit" ? "Save" : "Add"}
       />
     </View>
   );
@@ -206,4 +219,12 @@ const JobForm = ({ onSubmit,...props}) => {
 
 export default JobForm;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    marginVertical: verticalScale(10),
+    backgroundColor: Colors.White,
+    height: verticalScale(65),
+    justifyContent: "flex-start",
+    paddingHorizontal: ms(20),
+  },
+});

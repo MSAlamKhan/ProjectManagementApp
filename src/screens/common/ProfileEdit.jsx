@@ -19,10 +19,8 @@ import CustomInput from "../../components/common/Inputs/CustomInput";
 import { useForm } from "react-hook-form";
 import CustomButton from "../../components/common/Button/CustomButton";
 import Error from "../../components/common/Error";
-import CustomLotti from "../../components/common/Modals/CustomLotti";
 import { useDispatch, useSelector } from "react-redux";
 import TickModal from "../../components/common/Modals/TickModal";
-import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 import { EditProfileApi } from "../../redux/actions/AuthAction";
 import Loader from "../../components/common/Modals/LoaderModal";
 
@@ -40,19 +38,7 @@ const ProfileEdit = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    mode: "all",
-    defaultValues: {
-      fname: userDetails?.firstname,
-      lname: userDetails?.lastname,
-      phone: userDetails?.phone_number,
-      address: userDetails?.address,
-      city: userDetails?.city,
-      sin_no: userDetails?.sin_number,
-      primary: userDetails?.primary_trade,
-      secondary: userDetails?.secondary_trade,
-    },
-  });
+  } = useForm({ mode: "all" });
 
   const camerasave = () => {
     let options = {
@@ -69,8 +55,6 @@ const ProfileEdit = ({ navigation }) => {
         console.log("ez pz");
       } else if (res.error) {
         console.log("ez pz win");
-      } else if (res.customButton) {
-        alert(res.customButton);
       } else {
         setProfile({
           name: res.assets?.[0]?.fileName,
@@ -124,7 +108,7 @@ const ProfileEdit = ({ navigation }) => {
                 )}
               </View>
 
-              {isEditing ? (
+              {isEditing && (
                 <TouchableOpacity
                   onPress={() => camerasave()}
                   style={styles.IconBox}
@@ -136,7 +120,7 @@ const ProfileEdit = ({ navigation }) => {
                     style={styles.Icon}
                   />
                 </TouchableOpacity>
-              ) : null}
+              )}
             </View>
 
             <CustomButton
@@ -149,11 +133,12 @@ const ProfileEdit = ({ navigation }) => {
             />
             <View>
               <CustomInput
-                fontSize={scale(16)}
-                control={control}
                 name="fname"
-                placeholder="First Name"
+                control={control}
+                fontSize={scale(16)}
                 editable={isEditing}
+                defaultValue={userDetails?.firstname}
+                placeholder="First Name"
                 rules={{
                   required: "First Name is required",
                 }}
@@ -166,9 +151,10 @@ const ProfileEdit = ({ navigation }) => {
               )}
 
               <CustomInput
+                name="lname"
                 fontSize={scale(16)}
                 control={control}
-                name="lname"
+                defaultValue={userDetails?.lastname}
                 placeholder="Last Name"
                 editable={isEditing}
                 rules={{
@@ -186,6 +172,7 @@ const ProfileEdit = ({ navigation }) => {
                 fontSize={scale(16)}
                 control={control}
                 name="phone"
+                defaultValue={userDetails?.phone_number}
                 keyboardType={"numeric"}
                 placeholder="Phone Number"
                 editable={isEditing}
@@ -210,6 +197,7 @@ const ProfileEdit = ({ navigation }) => {
                 name="address"
                 placeholder="Address"
                 editable={isEditing}
+                defaultValue={userDetails?.address}
                 rules={{
                   required: "Address is required",
                 }}
@@ -226,6 +214,7 @@ const ProfileEdit = ({ navigation }) => {
                 control={control}
                 name="city"
                 placeholder="City"
+                defaultValue={userDetails?.city}
                 editable={isEditing}
                 rules={{
                   required: "City is required",
@@ -242,6 +231,7 @@ const ProfileEdit = ({ navigation }) => {
                 fontSize={scale(16)}
                 control={control}
                 name="sin_no"
+                defaultValue={userDetails?.sin_number}
                 keyboardType={"numeric"}
                 placeholder="Sin Number"
                 editable={isEditing}
@@ -255,10 +245,12 @@ const ProfileEdit = ({ navigation }) => {
                   text={errors.sin_no.message}
                 />
               )}
-
-              <CustomInput
+{userDetails.role_id == 1 && (
+  <>
+    <CustomInput
                 fontSize={scale(16)}
                 control={control}
+                defaultValue={userDetails?.primary_trade}
                 name="primary"
                 placeholder="Primary Trade"
                 editable={isEditing}
@@ -279,6 +271,7 @@ const ProfileEdit = ({ navigation }) => {
                 name="secondary"
                 placeholder="Secondary Trade"
                 editable={isEditing}
+                defaultValue={userDetails?.secondary_trade}
                 rules={{
                   required: "Secondary Trade is required",
                 }}
@@ -289,6 +282,9 @@ const ProfileEdit = ({ navigation }) => {
                   text={errors.secondary.message}
                 />
               )}
+  </>
+)}
+              
             </View>
             {isEditing ? (
               <CustomButton
@@ -305,16 +301,9 @@ const ProfileEdit = ({ navigation }) => {
 
         <TickModal
           text={msg}
-          // onPress={() => setCheck2(false)}
+          isVisible={successModal}
           onBackdropPress={() => setSuccessModal(false)}
-          isVisible={successModal}
         />
-
-        {/* <CustomLotti
-          isVisible={successModal}
-          source={require("../../assets/lotti/success.json")}
-          Title={"Profile Updated!"}
-        /> */}
       </Background>
     </SafeAreaView>
   );

@@ -8,10 +8,12 @@ import ReasonModal from "../../../components/common/Modals/ReasonModal";
 import { useForm } from "react-hook-form";
 import CustomButton from "../../../components/common/Button/CustomButton";
 import { verticalScale } from "react-native-size-matters";
+import { useSelector } from "react-redux";
 
 const LateJob = ({ navigation }) => {
   const [select, setSelect] = useState(false);
-
+  const reasons = useSelector((state) => state.getting_late);
+  console.log("reasons", reasons);
   const {
     control,
     handleSubmit,
@@ -20,13 +22,12 @@ const LateJob = ({ navigation }) => {
 
   const [reasonModal, setReasonModal] = useState(false);
 
-  const onSubmit = () =>{
-    console.log('select', select)
-  }
+  const onSubmit = () => {
+    console.log("select", select);
+  };
 
   const closeReasonModal = () => {
     setReasonModal(false);
-  
   };
 
   const handleReason = (id) => {
@@ -34,31 +35,6 @@ const LateJob = ({ navigation }) => {
     setReasonModal(true);
   };
 
-  const reasons = [
-    {
-      id: 1,
-      reason: "I was sick",
-      details: "I was unable to complete the task on time due to illness.",
-    },
-    {
-      id: 2,
-      reason: "I had technical difficulties",
-      details:
-        "I was unable to complete the task on time due to technical difficulties.",
-    },
-    {
-      id: 3,
-      reason: "I had a family emergency",
-      details:
-        "I was unable to complete the task on time due to a family emergency.",
-    },
-    {
-      id: 4,
-      reason: "Other",
-      details:
-        "I was unable to complete the task on time due to another reason.",
-    },
-  ];
   return (
     <Background>
       <BackIcon title={"Select Reason for late"} />
@@ -76,7 +52,11 @@ const LateJob = ({ navigation }) => {
             );
           })}
 
-          <CustomButton title = {'SUBMIT'} onPress={onSubmit} containerRestyle = {{marginVertical: verticalScale(15)}}/>
+          {/* <CustomButton
+            title={"SUBMIT"}
+            onPress={onSubmit}
+            containerRestyle={{ marginVertical: verticalScale(15) }}
+          /> */}
         </ScrollView>
       </View>
       <ReasonModal

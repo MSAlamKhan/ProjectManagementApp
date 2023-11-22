@@ -19,6 +19,7 @@ const BackIcon = (props) => {
         paddingHorizontal: moderateScale(20),
         flexDirection: "row",
         alignItems: "center",
+        marginTop: StatusBar.currentHeight,
       }}
     >
       <TouchableOpacity
@@ -31,7 +32,6 @@ const BackIcon = (props) => {
           height: scale(36),
           marginVertical: verticalScale(20),
           borderRadius: 100,
-          marginTop: StatusBar.currentHeight,
         }}
       >
         <Entypo

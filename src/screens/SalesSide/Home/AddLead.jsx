@@ -1,42 +1,49 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import Background from "../../../components/common/Background";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
-import JobForm from "../../../components/common/Cards/JobForm";
-import BackIcon from "../../../components/common/BackIcon";
-import CustomButton from "../../../components/common/Button/CustomButton";
 import { verticalScale } from "react-native-size-matters";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { JOB_DATA } from "../../../redux/reducer";
+import { AddJob } from "../../../redux/actions/UserAction";
+
+import Background from "../../../components/common/Background";
+import JobForm from "../../../components/common/Cards/JobForm";
+import BackIcon from "../../../components/common/BackIcon";
 import CustomLotti from "../../../components/common/Modals/CustomLotti";
+import Loader from "../../../components/common/Modals/LoaderModal";
 
 const AddLead = ({ navigation, route }) => {
+  const { type } = route.params;
+  const date = useSelector((state) => state.selecteddate);
   const [allImages, setAllImages] = useState([]);
-
-  const { type, imageChoosen } = route.params;
-  console.log("type", imageChoosen);
+  const [allVideos, setAllVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [successModal, setSuccessModal] = useState(false);
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "all" });
-
+  console.log("allImages =============>", allImages);
+  console.log("allVideos =============>", allVideos);
   const dispatch = useDispatch();
 
   const onSubmit = (obj) => {
+    console.log("onSubmit");
     const data = { ...obj };
-    data.imagesAll = allImages;
-    console.log("data ========>", data);
+    // data.imagesAll = allImages;
+    // data.videoAll = allVideos;
     dispatch({ type: JOB_DATA, payload: { data } });
-    setSuccessModal(true);
-    setTimeout(() => {
-      setSuccessModal(false);
-      navigation.goBack();
-    }, 3000);
+
+    dispatch(
+      AddJob(
+        data,
+        allImages,
+        allVideos,
+        date,
+        setLoading,
+        setSuccessModal,
+        navigation
+      )
+    );
   };
+
   return (
     <Background>
       <BackIcon />
@@ -51,16 +58,19 @@ const AddLead = ({ navigation, route }) => {
                 type: "image",
                 title: "Upload Image",
                 getImages: setAllImages,
+                getVideos: setAllVideos,
               })
             }
             onVideoPress={() =>
               navigation.navigate("imageselection", {
                 type: "video",
                 title: "Upload Video",
+                getImages: setAllImages,
+                getVideos: setAllVideos,
               })
             }
           />
-          <View style={{ marginVertical: verticalScale(20) }}></View>
+          <View style={{ marginVertical: verticalScale(20) }} />
         </View>
       </ScrollView>
       <CustomLotti
@@ -68,6 +78,7 @@ const AddLead = ({ navigation, route }) => {
         source={require("../../../assets/lotti/success.json")}
         Title={type == "edit" ? "Saved!" : "Job Added!"}
       />
+      <Loader isVisible={loading} />
     </Background>
   );
 };

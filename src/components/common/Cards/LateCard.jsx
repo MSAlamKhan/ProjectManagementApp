@@ -4,17 +4,23 @@ import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 import CustomButton from "../Button/CustomButton";
+import moment from "moment";
 
 const LateCard = ({ data, ...props }) => {
- 
-    
-  
   return (
     <View style={styles.Box}>
-      <Text style={styles.Title}>{data.reason}</Text>
-      <Text style={styles.Detail}>{data.details}</Text>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>time of create:&nbsp;</Text>
+        <Text style={styles.DescText}>
+          {moment(data?.created_at).format("MMM Do YY")}
+        </Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>Reason:&nbsp;</Text>
+        <Text style={styles.DescText}>{data?.reason}</Text>
+      </View>
 
-      <CustomButton
+      {/* <CustomButton
         title={props.select == data.id ? "SELECTED" : "SELECT"}
         containerRestyle={{
           height: verticalScale(45),
@@ -22,7 +28,7 @@ const LateCard = ({ data, ...props }) => {
           backgroundColor: props.select == data.id ? Colors.Main : Colors.Blue,
         }}
         onPress={data.reason == "Other" ? props.onPressReason : props.onPress}
-      />
+      /> */}
     </View>
   );
 };
@@ -48,5 +54,10 @@ const styles = StyleSheet.create({
     fontFamily: Font.AnekBangla500,
     color: Colors.Black,
     fontSize: scale(14),
+  },
+  Heading: {
+    color: Colors.Black,
+    fontSize: scale(20),
+    fontFamily: Font.AnekBangla700,
   },
 });

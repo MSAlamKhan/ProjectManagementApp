@@ -1,61 +1,51 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
 import React from "react";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import moment from "moment";
+import { Font } from "../../../utils/font";
 import { Colors } from "../../../utils/Color";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
-import Feather from "react-native-vector-icons/Feather";
-import { Font } from "../../../utils/font";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  ms,
+  scale,
+  verticalScale,
+  s,
+} from "react-native-size-matters";
 
-const TaskCard = ({route,...props}) => {
-  
-  
-
+const TaskCard = ({ onPress, data, number }) => {
+  const index = number + 1;
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={props.onPress} style={styles.Main}>
+    <Pressable
+      android_ripple={{ color: Colors.Main }}
+      onPress={onPress}
+      style={styles.Main}
+    >
       <View style={styles.HeadingView}>
-        <Text style={styles.Heading}>Task 1</Text>
+        <Text style={styles.Heading}>Task {index}</Text>
       </View>
-      {/* {type &&  (
-        <Text style={styles.Red}>
-          REASON: I was not able to come because of a family emergency
-        </Text>
-      )} */}
 
       <View style={GlobalStyle.Row}>
         <View
-          style={{
-            paddingHorizontal: moderateScale(10),
-            marginTop: verticalScale(10),
-          }}
+          style={styles.Pad}
         >
           <View style={GlobalStyle.Row}>
             <Text style={styles.Title}>Customer Name:</Text>
-            <Text style={styles.Detail}>Lorem ipsum</Text>
+            <Text style={styles.Detail}>{data.task_title}</Text>
           </View>
 
           <View style={GlobalStyle.Row}>
             <Text style={styles.Title}>Date of finalization:</Text>
-            <Text style={styles.Detail}>Lorem ipsum</Text>
+            <Text style={styles.Detail}>
+              {moment(data?.deadline_date).format("MMM Do YY")}
+            </Text>
           </View>
 
-          <View style={GlobalStyle.Row}>
-            <Text style={styles.Title}>Task Address:</Text>
-            <Text style={styles.Detail}>Lorem ipsum</Text>
-          </View>
-
-          <View style={GlobalStyle.Row}>
+          <View style={{ flexDirection: "row", width: "95%" }}>
             <Text style={styles.Title}>Description:</Text>
-            <Text style={styles.Detail}>Lorem Ipsum</Text>
+            <Text style={styles.Detail}>{data.task_description}</Text>
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -63,44 +53,48 @@ export default TaskCard;
 
 const styles = StyleSheet.create({
   Main: {
-    backgroundColor: Colors.White,
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: verticalScale(15),
-    overflow: "hidden",
-    borderColor: Colors.borderColor,
     borderWidth: 2,
-    borderRadius: scale(10),
+    overflow: "hidden",
+    borderRadius: s(10),
+    marginTop: verticalScale(5),
+    backgroundColor: Colors.White,
+    borderColor: Colors.borderColor,
+    paddingVertical: verticalScale(15),
+    paddingHorizontal: ms(20),
   },
   Red: {
-    fontSize: scale(16),
-    fontFamily: Font.AnekBangla700,
+    fontSize: s(16),
     color: Colors.Red,
     textAlign: "center",
+    fontFamily: Font.AnekBangla700,
     marginVertical: verticalScale(5),
   },
   HeadingView: {
-    backgroundColor: Colors.Blue,
-    // flex: 1,
-    borderRadius: scale(10),
-    alignItems: "center",
     width: "100%",
+    alignItems: "center",
+    borderRadius: scale(10),
+    backgroundColor: Colors.Blue,
   },
   Heading: {
-    fontSize: scale(18),
-    fontFamily: Font.AnekBangla700,
+    fontSize: s(18),
     color: Colors.White,
+    fontFamily: Font.AnekBangla700,
   },
   Title: {
-    fontSize: scale(14),
-    fontFamily: Font.AnekBangla600,
+    fontSize: s(14),
     color: Colors.GreyText,
+    fontFamily: Font.AnekBangla600,
   },
 
   Detail: {
-    fontFamily: Font.AnekBangla500,
-    fontSize: scale(14),
-    color: Colors.Black,
-    marginLeft: moderateScale(15),
+    fontSize: s(14),
     maxWidth: "80%",
+    color: Colors.Black,
+    fontFamily: Font.AnekBangla500,
+    marginLeft: ms(15),
   },
+  pad:{
+    paddingHorizontal: ms(10),
+    marginTop: verticalScale(10),
+  }
 });

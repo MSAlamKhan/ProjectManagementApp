@@ -8,7 +8,6 @@ const Error = props => {
   return (
     <View style={styles.Container}>
       <Feather name={'info'} size={scale(20)} color={'red'} />
-
       <Text style={[styles.error,props.textStyle]}>{props.text}</Text>
     </View>
   );

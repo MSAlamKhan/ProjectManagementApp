@@ -19,7 +19,6 @@ import { Colors } from "../../utils/Color";
 import CustomButton from "../../components/common/Button/CustomButton";
 import Error from "../../components/common/Error";
 import { useDispatch, useSelector } from "react-redux";
-import { IS_SIGN_IN } from "../../redux/reducer";
 import { ForgotPassApi, LoginApi } from "../../redux/actions/AuthAction";
 import IncorrectModal from "../../components/common/Modals/IncorrectModal";
 
@@ -38,7 +37,6 @@ const ForgotPass = ({ navigation }) => {
     } = useForm({ mode: "all" });
 
     const onSubmit = (data) => {
-        // ForgotPassApi(data, setLoading, navigation)
         dispatch(ForgotPassApi(data, setLoading, navigation, '', setCheck));
     };
     return (
@@ -54,7 +52,6 @@ const ForgotPass = ({ navigation }) => {
                             fontFamily: Font.AnekBangla700,
                             color: Colors.Black,
                         }}>Check your email for otp</Text>
-                        {/* <Text style={GlobalStyle.BlackText}>Check your email for otp</Text> */}
                     </View>
                     <CustomInput
                         fontSize={scale(16)}

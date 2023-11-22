@@ -16,39 +16,34 @@ import { Font } from "../../../utils/font";
 import CustomInput from "../Inputs/CustomInput";
 import CustomButton from "../Button/CustomButton";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
+import Error from "../Error";
 
-const ReasonModal = (props) => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "all" });
-
+const ReasonModal = ({
+  isVisible,
+  onBackdropPress,
+  restyleMainModal,
+  ContainerRestyle,
+  heading,
+  question,
+  onPressSubmit,
+  children,
+}) => {
   return (
     <View>
       <ReactNativeModal
-        onBackdropPress={props.onBackdropPress}
+        onBackdropPress={onBackdropPress}
         backdropOpacity={0}
-        isVisible={props.isVisible}
+        isVisible={isVisible}
         animationIn={"fadeIn"}
         animationOut={"fadeOut"}
-        style={[GlobalStyle.MainModal, props.restyleMainModal]}
+        style={[GlobalStyle.MainModal, restyleMainModal]}
       >
-        <View style={[styles.ModalContainer, props.ContainerRestyle]}>
+        <View style={[styles.ModalContainer, ContainerRestyle]}>
           <ScrollView>
             <View style={styles.Heading}>
               <Text style={[styles.Text, { fontSize: scale(18) }]}>
-                {props.heading}
+                {heading}
               </Text>
-
-              {/* <View style={styles.CloseBox}>
-                <AntDesign
-                  onPress={props.onPressClose}
-                  name="close"
-                  size={scale(14)}
-                  color={Colors.CloseColor}
-                />
-              </View> */}
             </View>
 
             <View
@@ -63,31 +58,8 @@ const ReasonModal = (props) => {
             />
 
             <View style={styles.ApplicationContent}>
-              <Text style={styles.Text}>{props.question}</Text>
-
-              <CustomInput
-                multiline={true}
-                boxStyle={{
-                  paddingHorizontal: moderateScale(0),
-                  backgroundColor: Colors.White,
-                  borderRadius: scale(14),
-                  height: verticalScale(250),
-                  borderColor: Colors.White,
-                  alignItems: "flex-start",
-                }}
-                restyle={{
-                  paddingHorizontal: moderateScale(20),
-                  color: Colors.Black,
-                }}
-                fontSize={scale(16)}
-                size={scale(24)}
-                maxLength = {120}
-                control={control}
-                name="description"
-                rules={{
-                  required: "Description is required",
-                }}
-              />
+              <Text style={styles.Text}>{question}</Text>
+              {children}
             </View>
 
             <View style={styles.ButtonView}>
@@ -97,7 +69,8 @@ const ReasonModal = (props) => {
                   backgroundColor: Colors.Blue,
                   borderRadius: scale(14),
                 }}
-                onPress={props.onPressSubmit}
+                // onPress={handleSubmit()}
+                onPress={onPressSubmit}
               />
             </View>
           </ScrollView>
@@ -129,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: moderateScale(20),
     justifyContent: "space-between",
-    alignItems:'center'
+    alignItems: "center",
   },
 
   Text: {
@@ -137,8 +110,6 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
     color: Colors.White,
   },
-
-
 
   ApplicationContent: {
     marginTop: verticalScale(20),

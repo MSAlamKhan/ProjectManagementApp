@@ -1,19 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
+import { Colors } from "../../../utils/Color";
+import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import moment from "moment";
 
-const CompleteTaskCard = ({ data, type, time }) => {
+const CompleteTaskCard = ({ data, type, time,number }) => {
+  const index = number + 1
   return (
     <View style={styles.MainBox}>
-      <Text style={styles.Heading}>Task {data.id}</Text>
+      <Text style={styles.Heading}>Task {index}</Text>
 
       <View style={GlobalStyle.RowBetween}>
         <View style={styles.WhiteBox}>
           <Text style={styles.SubHeading}>Completion Date</Text>
-          <Text style={styles.Detail}>{data.complete_date}</Text>
+          <Text style={styles.Detail}> {moment(data?.complete_date).format("MMM/Do/YY")}</Text>
         </View>
 
         <View style={styles.WhiteBox}>
@@ -21,14 +23,14 @@ const CompleteTaskCard = ({ data, type, time }) => {
             Job Title
           </Text>
           <View style={styles.TitleContainer}>
-            <Text style={styles.Title}>{data.job_title}</Text>
+            <Text style={styles.Title}>{data.task_title}</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.WhiteBox}>
         <Text style={styles.SubHeading}>Job Description:</Text>
-        <Text style={styles.Detail}>{data.description}</Text>
+        <Text style={styles.Detail}>{data.task_description}</Text>
       </View>
 
       {/* If completed jobs and is late */}

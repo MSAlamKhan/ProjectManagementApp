@@ -19,7 +19,6 @@ import { Colors } from "../../../utils/Color";
 import { Font } from "../../../utils/font";
 
 const CustomInput = forwardRef((props, ref) => {
-  // const [isVisible, setVisible] = useState(true);
   const { field } = useController({
     control: props.control,
     defaultValue: props.defaultValue || "",

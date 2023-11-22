@@ -1,0 +1,23 @@
+multiper image/video me camera needed
+image/video is not showing in image card ==> video card should have cancel and play button
+
+image and video is not showing in portal
+maybe upload nhh horahi hay
+
+red dot is chota
+
+notification show nhh horahi hay in notification page // late aarahi hay ====== Done
+
+notification me time shai nhh aaraha hay  ====== Done
+
+taade side dashboard count number is not updating swipe down refrest and reload when task me kuch ho 
+profile page dropdown trade promary and 2nd
+
+amount should have $ and toFix()
+
+change graph onLongPress and graph will be for all the data
+
+30 days or by 60 or by 90 days in saleside selection
+4. Total number of tasks delivered late. in trade side
+
+trade side only ==> show panding all data on press of dashoard panding button and wv

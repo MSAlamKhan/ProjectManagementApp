@@ -118,19 +118,13 @@ const OtpScreen = ({ navigation, route }) => {
                         textContentType="oneTimeCode"
                         renderCell={({ index, symbol, isFocused }) => (
                             <View
-                                style={{
-                                    backgroundColor: Colors.White,
-                                    borderRadius: scale(10),
-                                }}>
+                            key={index}
+                                style={styles.OTPBox}>
                                 <Text
-                                    key={index}
+                                    
                                     style={[
                                         { color: Colors.Black },
-                                        styles.cell,
-                                        isFocused && styles.focusCell,
-                                        Platform.OS == 'ios'
-                                            ? { lineHeight: verticalScale(30) }
-                                            : { textAlignVertical: 'center' },
+                                        styles.cell
                                     ]}
                                     onLayout={getCellOnLayoutHandler(index)}>
                                     {symbol || (isFocused ? <Cursor /> : null)}
@@ -213,17 +207,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cell: {
+       
+        fontSize: scale(20),
+        color: Colors.Black,
+        fontFamily: Font.Manrope400,
+    },
+    OTPBox:{
         width: scale(55),
         height: scale(50),
-        fontSize: scale(20),
-        textAlign: 'center',
-        color: Colors.OtpText,
-        fontFamily: Font.Manrope400,
-        // borderRadius: scale(30),
-    },
+        alignItems:'center',
+        borderRadius: scale(10),
+        justifyContent:'center',
+        backgroundColor: Colors.White,
+    }
+    ,
 
-    OtpText: {
-        // fontFamily: Font.Poppins400,
-        fontSize: scale(14),
-    },
 });

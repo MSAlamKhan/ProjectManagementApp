@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import Background from "../../components/common/Background";
@@ -37,10 +38,11 @@ const Signin = ({ navigation }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "all" });
+  const OS = Platform.OS
 
   const onSubmit = (data) => {
     // console.log("data", data);
-    dispatch(LoginApi(data, setLoading, setCheck));
+    dispatch(LoginApi(data, setLoading, setCheck,OS));
     // dispatch({ type: IS_SIGN_IN, payload: data.email });
     // console.log("signIn", signIn);
   };

@@ -3,8 +3,9 @@ import { OTP, USER_DETAILS } from "../reducer"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export const LoginApi = (data, setLoading, setCheck) => {
+export const LoginApi = (data, setLoading, setCheck,os) => {
     return async (dispatch) => {
+        const deviceToken = await AsyncStorage.getItem('onesignaltoken')
         try {
             setLoading(true)
             const baseUrl = `${BASE_URL}login`
@@ -12,6 +13,9 @@ export const LoginApi = (data, setLoading, setCheck) => {
 
             myData.append('email', data.email)
             myData.append('password', data.password)
+            myData.append('device_name', os)
+            myData.append('device_token', deviceToken)
+
 
             const response = await fetch(baseUrl, {
                 method: 'post',

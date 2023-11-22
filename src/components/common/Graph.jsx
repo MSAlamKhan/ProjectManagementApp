@@ -1,60 +1,67 @@
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import React from 'react';
-import {LineChart} from 'react-native-chart-kit';
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Dimensions } from "react-native";
+import { LineChart } from "react-native-chart-kit";
+import { scale, vs } from "react-native-size-matters";
+import { Colors } from "../../utils/Color";
+import { getGraphData } from "../../redux/actions/UserAction";
+import Loader from "./Modals/LoaderModal";
 
-import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import { Colors } from '../../utils/Color';
-
-
-const screenWidth = Dimensions.get('window').width;
+const { width } = Dimensions.get("window");
 
 const Graph = () => {
-  const chartConfig = {
+  const [load, setLoad] = useState(true);
+  const [value, setValue] = useState([]);
+  const [label, setLabel] = useState([]);
+  useEffect(() => {
+    getGraphData(setLabel,setValue,setLoad);
+  }, []);
 
+  const chartConf = {
     backgroundGradientFrom: Colors.White,
     backgroundGradientTo: Colors.White,
     color: (opacity = 1) => `rgba(53, 56, 143, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 2,
     barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
+    useShadowColorFromDataset: false,
     labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     propsForDots: {
       r: scale(5),
     },
   };
   const data = {
-    labels: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'],
+    labels: label,
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43],
+        data: value,
       },
     ],
-    legend: ['Workload'],
+    legend: ["Workload"],
   };
-  return (
-    <View
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: scale(10),
-        overflow: 'hidden',
-        // marginHorizontal: moderateScale(10),
-        backgroundColor: Colors.White
-      }}>
+  return load ? (
+    <Loader />
+  ) : (
+    <View style={styles.container}>
       <LineChart
-        withShadow = {false}
+        data={data}
+        width={width}
+        height={vs(220)}
+        withShadow={false}
+        withHorizontalLabels
+        chartConfig={chartConf}
         withVerticalLines={false}
         withHorizontalLines={false}
-        withHorizontalLabels={true}
-        data={data}
-        width={screenWidth}
-        height={verticalScale(220)}
-        chartConfig={chartConfig}
       />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: scale(10),
+    overflow: "hidden",
+    backgroundColor: Colors.White,
+  },
+});
 export default Graph;
-
-const styles = StyleSheet.create({});

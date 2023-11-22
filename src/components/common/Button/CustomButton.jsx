@@ -49,8 +49,6 @@ const CustomButton = (props) => {
       ) : (
         <Text style={[styles.font, props.textStyle]}>{props.title}</Text>
       )}
-
-      {/* <Text style={[styles.font, props.textStyle]}>{props.title}</Text> */}
     </TouchableOpacity>
   );
 };

@@ -1,11 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 //Icons Import
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import Octicons from "react-native-vector-icons/Octicons";
@@ -14,25 +12,46 @@ import { Colors } from "../utils/Color";
 import Home from "../screens/SalesSide/Home/Home";
 import { scale, verticalScale } from "react-native-size-matters";
 import { Font } from "../utils/font";
-import JobForm from "../components/common/Cards/JobForm";
 import AddLead from "../screens/SalesSide/Home/AddLead";
 import ImageSelection from "../components/common/ImageSelection";
 import JobMain from "../screens/SalesSide/Home/JobMain";
 import AllTask from "../screens/SalesSide/Home/AllTask";
 import Setting from "../screens/common/Setting";
 import ProfileEdit from "../screens/common/ProfileEdit";
+import Terms from "../screens/common/Terms";
 import Notification from "../screens/common/Notification";
 import CompletedJob from "../screens/SalesSide/Home/CompletedJob";
+import { useDispatch, useSelector } from "react-redux";
+import { Text, View } from "react-native";
+import { get_notification_Count } from "../redux/actions/UserAction";
+import OneSignal from "react-native-onesignal";
 
 const SaleNavigator = () => {
   const Tab = createBottomTabNavigator();
+  const dispatch = useDispatch();
+
+  
+  const notification = useSelector((state) => state.notification_length)
+  OneSignal.setNotificationWillShowInForegroundHandler(
+    notificationReceivedEvent => {
+      let notification = notificationReceivedEvent.getNotification();
+      OneSignal.add;
+      const data = notification.additionalData;
+      if (data?.type == "message") {
+        dispatch(get_notification_Count());
+      } else {
+        dispatch(get_notification_Count());
+      }
+      console.log('data', data);
+      notificationReceivedEvent.complete(notification);
+    },
+  );
   return (
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
           tabBarHideOnKeyboard: true,
-          // tabBarShowLabel: false,
           headerShown: false,
           tabBarActiveTintColor: Colors.Black,
           tabBarInactiveTintColor: Colors.BottomIcon,
@@ -62,6 +81,7 @@ const SaleNavigator = () => {
 
         <Tab.Screen
           name="Notification"
+          
           component={AllNotification}
           options={{
             tabBarLabelStyle: {
@@ -70,7 +90,26 @@ const SaleNavigator = () => {
             },
             tabBarLabel: "Notification",
             tabBarIcon: ({ color, size }) => (
+              <>
+              {notification > 0 && (
+                <View 
+                  style={{
+                    borderRadius: 100,
+                    backgroundColor: "red",
+                    width: 10,
+                    aspectRatio: 1 / 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ fontSize: 7, color: "#fff" }}>
+                    {notification}
+                  </Text>
+                </View>
+              )}
+
               <Ionicons name={"notifications"} color={color} size={size} />
+            </>
             ),
           }}
         />
@@ -133,6 +172,7 @@ function AllSetting() {
     >
       <Stack.Screen name="setting" component={Setting} />
       <Stack.Screen name="profileedit" component={ProfileEdit} />
+      <Stack.Screen name="term" component={Terms} />
     </Stack.Navigator>
   );
 }

@@ -1,43 +1,35 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import moment from "moment";
 import MaterialICons from "react-native-vector-icons/MaterialIcons";
-import { GlobalStyle } from "../../constant/GlobalStyle";
-import { Colors } from "../../utils/Color";
+
 import { Font } from "../../utils/font";
+import { Colors } from "../../utils/Color";
+import { StyleSheet, Text, View } from "react-native";
+import { GlobalStyle } from "../../constant/GlobalStyle";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const NotificationCard = ({ notification_data, type }) => {
+const NotificationCard = ({ data }) => {
+  const { created_at, message, title, type } = data;
   return (
-    <View>
-      {notification_data.map((data, index) => (
-        <View key={index} style={styles.InnerBox}>
-          <View>
-            {data.type == 'Reminder'? <Text style={styles.TypeText}>{data.type}</Text> : null }
-           
-            {data.type == "Reminder" ? null : (
-              <Text style={styles.TitleText}>{data.title}</Text>
-            )}
-          </View>
+    <View style={styles.InnerBox}>
+      <View>
+        {type == "Reminder" ? (
+          <Text style={styles.TypeText}>{type}</Text>
+        ) : (
+          <Text style={styles.TitleText}>{title}</Text>
+        )}
+      </View>
 
-          <Text
-            style={
-              styles.DescText}>
-            {data.description}
+      <Text style={styles.DescText}>{message}</Text>
+
+      <View style={[GlobalStyle.RowBetween, { marginTop: verticalScale(10) }]}>
+        <View style={styles.TimeView}>
+          <MaterialICons name={"access-time"} color={Colors.Black} />
+          <Text style={styles.TimeText}>
+            {moment(created_at).format('MM/DD/YYYY h:mm a')} 
           </Text>
-
-          <View
-            style={[GlobalStyle.RowBetween, { marginTop: verticalScale(10) }]}
-          >
-            <View style={styles.TimeView}>
-              <MaterialICons name={"access-time"} color={Colors.Black} />
-              <Text style={styles.TimeText}>{data.time}</Text>
-            </View>
-
-            {/* <Text style={styles.StatusText}>{data.status}</Text> */}
-          </View>
         </View>
-      ))}
+      </View>
     </View>
   );
 };
@@ -45,14 +37,12 @@ const NotificationCard = ({ notification_data, type }) => {
 export default NotificationCard;
 
 const styles = StyleSheet.create({
-
-
   InnerBox: {
-
     backgroundColor: Colors.White,
     borderRadius: scale(10),
     padding: scale(20),
-    marginVertical: verticalScale(15)
+    marginVertical: verticalScale(15),
+    marginHorizontal: scale(15),
   },
   TypeText: {
     color: Colors.Green,
@@ -83,7 +73,7 @@ const styles = StyleSheet.create({
   },
   TimeText: {
     color: Colors.Black,
-    fontSize: scale(14),
+    fontSize: scale(12),
     fontFamily: Font.AnekBangla500,
     marginLeft: moderateScale(5),
   },

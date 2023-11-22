@@ -1,54 +1,39 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Background from "./Background";
 import BackIcon from "./BackIcon";
-import { GlobalStyle } from "../../constant/GlobalStyle";
 import { Colors } from "../../utils/Color";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { Font } from "../../utils/font";
-import ImagePickerModal from "./Modals/ImagePickerModal";
-import { launchImageLibrary, launchCamera } from "react-native-image-picker";
-import Entypo from "react-native-vector-icons/Entypo";
+import { launchImageLibrary } from "react-native-image-picker";
 import CustomButton from "./Button/CustomButton";
 import CustomLotti from "./Modals/CustomLotti";
 import { useNavigation } from "@react-navigation/native";
 
 const ImageSelection = ({ route }) => {
   const navigation = useNavigation();
-  const { type, title,getImages } = route.params;
-
+  const { type, title, getImages, getVideos } = route.params;
+  const [imageChosen, setImageChosen] = useState([]);
+  const [videoChosen, setVideoChosen] = useState([]);
   const [successModal, setSuccessModal] = useState(false);
-  const handleSubmit = () => {
+
+  const onSubmit = () => {
     setSuccessModal(true);
     setTimeout(() => {
       setSuccessModal(false);
-      getImages(imageChoosen);
+      getImages((prev) => [...prev, ...imageChosen]);
+      getVideos((prev) => [...prev, ...videoChosen]);
       navigation.goBack();
     }, 2000);
   };
 
-  const [imageChoosen, setImageChoosen] = useState([]);
-
-  const handlePhoto = () => {};
-  //Image Functionality
-  const [imageModal, openImageModal] = useState(false);
-  const [saveimage, setsaveimage] = useState(false);
-
+  const repetitions = Array.from({ length: 10 });
   const [images, setImages] = useState(Array.from({ length: 10 }, () => null));
+  const [videos, setVideos] = useState(Array.from({ length: 10 }, () => null));
 
-  const [close, setClose] = useState(false);
-
-  const handleClose = (index) => {
-    console.log("index", index);
-  };
-
-  const closeImageModal = () => {
-    openImageModal(false);
-  };
-
-  const photosave = (index) => {
-    console.log("index", index);
+  const photoSave = (index) => {
     let options = {
       storageOptions: {
         mediaType: "photo",
@@ -60,49 +45,73 @@ const ImageSelection = ({ route }) => {
 
     launchImageLibrary(options, (res) => {
       if (res.didCancel) {
-        console.log("ez pz");
+        console.log("didCancel");
       } else if (res.error) {
-        console.log("ez pz win");
-      } else if (res.customButton) {
-        alert(res.customButton);
+        console.log("error");
       } else {
-        // setsaveimage(res.assets?.[0]?.uri);
-        // closeImageModal();
         const newImages = [...images];
-        newImages[index] = res.assets?.[0]?.uri;
-        console.log("res.assets", res.assets);
+        const ele = res.assets[0];
+        newImages[index] = ele.uri;
         setImages(newImages);
-        setImageChoosen((prevImages) => [...prevImages, res.assets[0]?.uri]);
-        closeImageModal();
+        setImageChosen((prevImages) => [
+          ...prevImages,
+          {
+            name: ele.fileName,
+            uri: ele.uri,
+            type: ele.type,
+          },
+        ]);
       }
     });
   };
 
-  const camerasave = async () => {
-    let options = {
-      storageOptions: {
-        mediaType: "photo",
-        path: "image",
-        includeExtra: true,
-      },
-      selectionLimit: 1,
+  const VideoSave = (index) => {
+    const options = {
+      title: "Select video",
+      mediaType: "video",
+      path: "video",
+      quality: 1,
     };
 
-    await launchCamera(options, (res) => {
+    launchImageLibrary(options, (res) => {
       if (res.didCancel) {
-        console.log("ez pz");
+        console.log("didCancel");
       } else if (res.error) {
-        console.log("ez pz win");
-      } else if (res.customButton) {
-        alert(res.customButton);
+        console.log("error");
       } else {
-        setsaveimage(res.assets?.[0]?.uri);
-        closeImageModal();
+        const newVideo = [...videos];
+        const ele = res.assets[0];
+        newVideo[index] = ele.uri;
+        setVideos(newVideo);
+        setVideoChosen((prevVid) => [
+          ...prevVid,
+          {
+            name: ele.fileName,
+            uri: ele.uri,
+            type: ele.type,
+          },
+        ]);
       }
     });
   };
 
-  const repetitions = Array.from({ length: 10 });
+  const removeImage = (index) => {
+    const newImages = [...images];
+    newImages[index] = null;
+    setImages(newImages);
+
+    const filteredImages = imageChosen.filter((_, i) => i !== index);
+    setImageChosen(filteredImages);
+  };
+
+  const removeVideo = (index) => {
+    const newVideos = [...videos];
+    newVideos[index] = null;
+    setVideos(newVideos);
+
+    const filteredVideos = videoChosen.filter((_, i) => i !== index);
+    setVideoChosen(filteredVideos);
+  };
 
   return (
     <Background>
@@ -134,28 +143,70 @@ const ImageSelection = ({ route }) => {
       >
         {repetitions.map((item, index) => (
           <TouchableOpacity
-            style={styles.AddBox}
             key={index}
-            onPress={() => photosave(index)}
+            style={styles.AddBox}
+            onPress={() => {
+              type == "image" ? photoSave(index) : VideoSave(index);
+            }}
           >
-            {images[index] ? (
+            {type == "image" ? (
               <>
-                <Image source={{ uri: images[index] }} style={styles.Image} />
+                {images[index] ? (
+                  <>
+                    <Image
+                      source={{ uri: images[index] }}
+                      style={styles.Image}
+                    />
+                    <TouchableOpacity
+                      style={styles.RemoveButton}
+                      onPress={() => removeImage(index)}
+                    >
+                      <AntDesign
+                        name="closecircle"
+                        size={scale(15)}
+                        color={Colors.White}
+                      />
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <MaterialCommunityIcons
+                    size={scale(24)}
+                    color={Colors.IconColor}
+                    name={"movie-plus-outline"}
+                    style={styles.Icon}
+                  />
+                )}
               </>
-            ) : type == "camera" ? (
-              <MaterialCommunityIcons
-                size={scale(24)}
-                color={Colors.IconColor}
-                name={"camera-plus-outline"}
-                style={styles.Icon}
-              />
             ) : (
-              <MaterialCommunityIcons
-                size={scale(24)}
-                color={Colors.IconColor}
-                name={"movie-plus-outline"}
-                style={styles.Icon}
-              />
+              <>
+                {videos[index] ? (
+                  <>
+                    <AntDesign
+                      size={scale(24)}
+                      color={Colors.White}
+                      name={"checkcircle"}
+                      style={styles.Icon}
+                    />
+                    <TouchableOpacity
+                      style={styles.RemoveButton}
+                      onPress={() => removeVideo(index)}
+                    >
+                      <AntDesign
+                        name="closecircle"
+                        size={scale(15)}
+                        color={Colors.White}
+                      />
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <MaterialCommunityIcons
+                    size={scale(24)}
+                    color={Colors.IconColor}
+                    name={"movie-plus-outline"}
+                    style={styles.Icon}
+                  />
+                )}
+              </>
             )}
           </TouchableOpacity>
         ))}
@@ -163,24 +214,14 @@ const ImageSelection = ({ route }) => {
 
       <CustomButton
         title={"Save"}
-        onPress={handleSubmit}
+        onPress={onSubmit}
         containerRestyle={styles.Button}
       />
-      {/* <ImagePickerModal
-        visible={imageModal}
-        OnPressCamera={() => {
-          camerasave();
-        }}
-        OnPressPhoto={() => {
-          handlePhoto(index);
-        }}
-        onClose={closeImageModal}
-      /> */}
 
       <CustomLotti
         isVisible={successModal}
         source={require("../../assets/lotti/success.json")}
-        Title={"Images Added!"}
+        Title={type == "image" ? "Images Added!" : "Videos Added!"}
       />
     </Background>
   );
@@ -217,5 +258,10 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     marginVertical: verticalScale(20),
+  },
+  RemoveButton: {
+    position: "absolute",
+    top: -7,
+    right: -7,
   },
 });
