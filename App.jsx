@@ -19,7 +19,8 @@ const App = () => {
   const userDetails = useSelector((state) => state.userDetails);
 
   useEffect(() => {
-    OneSignal.setAppId("41ec2948-bcfd-4204-ae97-052901f03973");
+    // OneSignal.setAppId("41ec2948-bcfd-4204-ae97-052901f03973");
+    OneSignal.setAppId("6f7696a9-805e-4821-91bc-6dcfd4a62367");
     OneSignal.promptForPushNotificationsWithUserResponse((response) => {
       console.log("Prompt response:", response);
     });
