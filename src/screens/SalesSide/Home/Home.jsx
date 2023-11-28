@@ -35,8 +35,8 @@ const Home = ({ navigation }) => {
     {
       id: 2,
       total: "Total Projects underprogress",
-      amount: get_dashboard_data?.inprogress,
-      color: "#FFAD41",
+      amount: "7",
+      color: Colors.Green,
     },
     {
       id: 3,

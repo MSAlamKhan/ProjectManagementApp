@@ -1,5 +1,12 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import React, { useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+} from "react-native";
+import React from "react";
 import Background from "../../../components/common/Background";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
 import { moderateScale, verticalScale } from "react-native-size-matters";
@@ -25,22 +32,28 @@ const Home = ({ navigation }) => {
     {
       id: 1,
       total: "Total Job assigned",
-      amount: data?.total_task_assign,
-      color: "#0077B6",
+      amount: "9",
+      color: Colors.Green,
       onPress: () => navigation.navigate("calendar"),
     },
+    // {
+    //   id: 2,
+    //   total: "Total number of pending jobs",
+    //   amount: "7",
+    //   color: "#FFAD41",
+    // },
     {
       id: 3,
       total: "Total completed submissions",
-      amount: data?.total_task_completed,
+      amount: "7",
       color: "#1E90FF",
       onPress: () => null,
     },
     {
       id: 4,
       total: "Total number of job delivered late",
-      amount: data?.task_delivered_late,
-      color: "#1E90FF",
+      amount: "7",
+      color: "#FFAD41",
       onPress: () => null,
     },
   ];
@@ -48,7 +61,7 @@ const Home = ({ navigation }) => {
     <Background>
       <ScrollView>
         <View style={GlobalStyle.ph20}>
-          <View style={{ height: height * 0.05 }} />
+          <View style={{ height: windowHeight * 0.05 }} />
           <View style={styles.TextView}>
             <Text style={GlobalStyle.BlueText}>Welcome To,</Text>
             <Text style={GlobalStyle.BlackText}>Trax Jobsite</Text>

@@ -26,13 +26,10 @@ const JobCard = ({ data, onPress, onDone, selected }) => {
       style={[styles.Main, { borderColor: data?.color }]}
     >
       <View style={GlobalStyle.RowBetween}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={[styles.Heading]}>Title:&nbsp;</Text>
-          <Text style={styles.DescText}>{data?.task_title}</Text>
-        </View>
-        {data?.color == Colors.Red && (
+        <Text style={styles.BlackText}>Task no.{data.id}</Text>
+        {data.time == 'late'  ? (
           <Feather name={"alert-circle"} size={scale(22)} color={Colors.Red} />
-        )}
+        ): null}
       </View>
 
       <View style={{ flexDirection: "row", alignItems: "center" }}>
