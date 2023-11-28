@@ -22,10 +22,12 @@ import TaskScreen from "../screens/TradeSide/Home/TaskScreen";
 import Notification from "../screens/common/Notification";
 import ViewJob from "../screens/TradeSide/Jobs/ViewJob";
 import LateJob from "../screens/TradeSide/Jobs/LateJob";
+import ShowFullTradeJobs from "../screens/TradeSide/Jobs/ShowFullTradeJobs";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text } from "react-native";
 import { get_notification_Count } from "../redux/actions/UserAction";
 import OneSignal from "react-native-onesignal";
+import TradeFullDetail from "../screens/TradeSide/Jobs/ShowFullTradeJobs/TradeFullDetail";
 
 const TradeNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -96,13 +98,17 @@ const TradeNavigator = () => {
                     style={{
                       borderRadius: 100,
                       backgroundColor: "red",
-                      width: 10,
+                      width: 12,
                       aspectRatio: 1 / 1,
                       justifyContent: "center",
                       alignItems: "center",
+                      position:'absolute',
+                      top:0,
+                      zIndex:1,
+                      right:'40%'
                     }}
                   >
-                    <Text style={{ fontSize: 7, color: "#fff" }}>
+                    <Text style={{ fontSize: 8, color: "#fff" }}>
                       {notification}
                     </Text>
                   </View>
@@ -148,6 +154,8 @@ function AllHome() {
       <Stack.Screen name="taskscreen" component={TaskScreen} />
       <Stack.Screen name="viewjob" component={ViewJob} />
       <Stack.Screen name="latejob" component={LateJob} />
+      <Stack.Screen name="showFullTradeJobs" component={ShowFullTradeJobs} />
+      <Stack.Screen name="tradeFullDetail" component={TradeFullDetail} />
     </Stack.Navigator>
   );
 }

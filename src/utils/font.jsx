@@ -6,6 +6,5 @@ export const Font = {
     AnekBangla700: 'AnekBangla-Bold',
     AnekBangla800: 'AnekBangla-ExtraBold',
     ESquare: 'E-SQUARE_DEMO'
-  
   };
   

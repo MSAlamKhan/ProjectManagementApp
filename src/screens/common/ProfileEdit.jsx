@@ -1,13 +1,12 @@
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   Image,
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import Background from "../../components/common/Background";
 import BackIcon from "../../components/common/BackIcon";
 import { GlobalStyle } from "../../constant/GlobalStyle";
@@ -23,16 +22,22 @@ import { useDispatch, useSelector } from "react-redux";
 import TickModal from "../../components/common/Modals/TickModal";
 import { EditProfileApi } from "../../redux/actions/AuthAction";
 import Loader from "../../components/common/Modals/LoaderModal";
+import DropDown from "../../components/common/Cards/DropDown";
 
 const ProfileEdit = ({ navigation }) => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
-
+  const dropdown_data = useSelector((state) => state.dropdown_data);
   const [isEditing, setIsEditing] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [msg, setMsg] = useState("");
+  const [primary, setPrimary] = useState(null);
+  const [secondary, setSecondary] = useState(null);
+
+  const [SecondaryError, setSecondaryError] = useState(null);
+  const [PrimaryError, setPrimaryError] = useState(null);
 
   const {
     control,
@@ -65,18 +70,31 @@ const ProfileEdit = ({ navigation }) => {
     });
   };
 
+  useEffect(() => {
+    setSecondaryError(false);
+    setPrimaryError(false);
+  }, [primary, secondary]);
+
   const onSubmit = (data) => {
-    dispatch(
-      EditProfileApi(
-        data,
-        profile,
-        setLoading,
-        setSuccessModal,
-        setIsEditing,
-        setMsg,
-        navigation
-      )
-    );
+    if (primary == null) {
+      setPrimaryError(true);
+    } else if (secondary == null) {
+      setSecondaryError(true);
+    } else {
+      dispatch(
+        EditProfileApi(
+          data,
+          primary,
+          secondary,
+          profile,
+          setLoading,
+          setSuccessModal,
+          setIsEditing,
+          setMsg,
+          navigation
+        )
+      );
+    }
   };
 
   return (
@@ -245,46 +263,34 @@ const ProfileEdit = ({ navigation }) => {
                   text={errors.sin_no.message}
                 />
               )}
-{userDetails.role_id == 1 && (
-  <>
-    <CustomInput
-                fontSize={scale(16)}
-                control={control}
-                defaultValue={userDetails?.primary_trade}
-                name="primary"
-                placeholder="Primary Trade"
-                editable={isEditing}
-                rules={{
-                  required: "Primary Trade is required",
-                }}
-              />
-              {errors.primary && (
-                <Error
-                  textStyle={{ color: Colors.Black }}
-                  text={errors.primary.message}
-                />
+              {userDetails.role_id == 1 && (
+                <>
+                  <DropDown
+                    placeholder="Primary Trade"
+                    items={dropdown_data}
+                    value={primary}
+                    setValue={(value) => setPrimary(value)}
+                  />
+                  {PrimaryError && (
+                    <Error
+                      textStyle={{ color: Colors.Black }}
+                      text={"Primary Trade is required"}
+                    />
+                  )}
+                  <DropDown
+                    placeholder="Secondary Trade"
+                    items={dropdown_data}
+                    value={secondary}
+                    setValue={(value) => setSecondary(value)}
+                  />
+                  {SecondaryError && (
+                    <Error
+                      textStyle={{ color: Colors.Black }}
+                      text={"Secondary Trade is required"}
+                    />
+                  )}
+                </>
               )}
-
-              <CustomInput
-                fontSize={scale(16)}
-                control={control}
-                name="secondary"
-                placeholder="Secondary Trade"
-                editable={isEditing}
-                defaultValue={userDetails?.secondary_trade}
-                rules={{
-                  required: "Secondary Trade is required",
-                }}
-              />
-              {errors.secondary && (
-                <Error
-                  textStyle={{ color: Colors.Black }}
-                  text={errors.secondary.message}
-                />
-              )}
-  </>
-)}
-              
             </View>
             {isEditing ? (
               <CustomButton

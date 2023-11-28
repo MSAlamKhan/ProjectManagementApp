@@ -3,8 +3,6 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity,
-    ScrollView,
     Dimensions,
 } from "react-native";
 import React, { useState } from "react";

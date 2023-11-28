@@ -1,9 +1,8 @@
 import { BASE_URL } from "../../utils/Base_urls"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GETTING_LATE, GET_DASHBOARD_DATA, GET_ID_TASK, GET_LEAD_TASK, GET_SALESLEAD_DATA, GET_TRADE_DASHBOARD_DATA, NOTIFICATION_DATA, NOTIFICATION_LENGTH, TASK_DETAILS } from "../reducer";
+import { DROPDOWN_DATA, GETTING_LATE, GET_DASHBOARD_DATA, GET_ID_TASK, GET_LEAD_TASK, GET_SALESLEAD_DATA, GET_TRADE_DASHBOARD_DATA, NOTIFICATION_DATA, NOTIFICATION_LENGTH, TASK_DETAILS } from "../reducer";
 
 export const AddJob = (data, images, video, tareekh, load, Success, navigation) => {
-    console.log('tareekh', tareekh)
     load(true)
     return async (dispatch) => {
         try {
@@ -23,8 +22,12 @@ export const AddJob = (data, images, video, tareekh, load, Success, navigation) 
             myData.append('work_budget', data.budget)
             myData.append('date_finalization', tareekh)
             myData.append('task_address', data.task_address)
-            myData.append(`images`, JSON.stringify(images))
-            myData.append(`videos`, JSON.stringify(video))
+            images.forEach((image, indx) => {
+                myData.append(`images[${indx}]`, image)
+            })
+            video.forEach((video, indx) => {
+                myData.append(`videos[${indx}]`, video)
+            })
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -47,7 +50,7 @@ export const AddJob = (data, images, video, tareekh, load, Success, navigation) 
 
         } catch (error) {
             load(false)
-            console.log('error', error)
+            console.log('catch error in AddJob', error)
         }
     }
 }
@@ -69,20 +72,25 @@ export const getSalesLead = () => {
                 console.log(responseData.error.message)
             }
         } catch (error) {
-            console.log('error', error)
+            console.log('catch error in getSalesLead', error)
         }
     }
 }
 
-export const getSalesDashboard = () => {
+export const getSalesDashboard = (duration) => {
     return async (dispatch) => {
         const userDetail = await AsyncStorage.getItem('user_details')
         const Data = JSON.parse(userDetail)
         try {
             const url = `${BASE_URL}sales-dashboard/${Data.id}`
 
+            const myData = new FormData()
+
+            myData.append('duration', duration)
+
             const response = await fetch(url, {
-                method: 'GET',
+                method: 'POST',
+                body: myData,
             })
             const responseData = await response.json()
             if (responseData?.success?.status == 200) {
@@ -144,7 +152,7 @@ export const CalenderSort = (date, load) => {
             }
         } catch (error) {
             load(false)
-            console.log('error', error)
+            console.log('catch error in CalenderSort', error)
         }
     }
 }
@@ -166,6 +174,7 @@ export const DoneApi = (item, load, select, reason, success) => {
                 select(true)
                 success(true)
                 dispatch({ type: TASK_DETAILS, payload: responseData?.success?.data })
+                dispatch(getTradeDashboard());
             } else if (responseData?.success?.status == 150) {
                 reason(prev => ({ ...prev, isVisible: true }))
                 load(false)
@@ -281,43 +290,46 @@ export const show_id_task = (id, navigation) => {
     }
 }
 
-export const getNotificationData = (data, load) => {
-    return async (dispatch) => {
-        const userDetail = await AsyncStorage.getItem('user_details')
-        const Data = JSON.parse(userDetail)
-        try {
-            load(true)
-            const url = `https://sassolution.org/lee/api/show-notification/${Data.id}`
-            const response = await fetch(url, {
-                method: 'GET',
-            })
-            const responseData = await response.json()
-            if (responseData?.success?.status == 200) {
-                load(false)
-                data(responseData?.success?.data)
-            } else {
-                load(false)
-                console.log('else error in show_id_task', responseData.error.message)
-            }
-        } catch (error) {
-            load(false)
-            console.log('catch error in getNotificationData', error)
-        }
-    }
-}
-
-export const getGraphData = async (label, value, load) => {
+export const getNotificationData = async (data, load) => {
     const userDetail = await AsyncStorage.getItem('user_details')
     const Data = JSON.parse(userDetail)
     try {
-        const url = `${BASE_URL}chart-dashboard/${Data.id}`
+        load(true)
+        const url = `https://sassolution.org/lee/api/show-notification/${Data.id}`
         const response = await fetch(url, {
             method: 'GET',
         })
         const responseData = await response.json()
         if (responseData?.success?.status == 200) {
-            label(responseData?.success?.data?.label)
-            value(responseData?.success?.data?.value)
+            load(false)
+            data(responseData?.success?.data)
+        } else {
+            load(false)
+            console.log('else error in show_id_task', responseData.error.message)
+        }
+    } catch (error) {
+        load(false)
+        console.log('catch error in getNotificationData', error)
+    }
+}
+
+export const getGraphData = async (type, value, load) => {
+    const userDetail = await AsyncStorage.getItem('user_details')
+    const Data = JSON.parse(userDetail)
+    try {
+        const url = `${BASE_URL}chart-dashboard/${Data.id}`
+        const myData = new FormData()
+
+        myData.append(`type`, type)
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: myData
+        })
+
+        const responseData = await response.json()
+        if (responseData?.success?.status == 200) {
+            value(responseData?.success?.data)
             setTimeout(() => {
                 load(false)
             }, 1000);
@@ -331,26 +343,145 @@ export const getGraphData = async (label, value, load) => {
     }
 }
 
+export const getSaleGraphData = async (type, value, load, duration) => {
+    const userDetail = await AsyncStorage.getItem('user_details')
+    const Data = JSON.parse(userDetail)
+    try {
+        const url = `${BASE_URL}chart-dashboard/${Data.id}`
+        const myData = new FormData()
+
+        myData.append(`type`, type)
+        myData.append(`duration`, duration)
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: myData
+        })
+
+        const responseData = await response.json()
+        if (responseData?.success?.status == 200) {
+            value(responseData?.success?.data)
+            setTimeout(() => {
+                load(false)
+            }, 1000);
+        } else {
+            load(false)
+            console.log('else error in getSaleGraphData', responseData.error.message)
+        }
+    } catch (error) {
+        load(false)
+        console.log('catch error in getSaleGraphData', error)
+    }
+}
+
+
 export const get_notification_Count = () => {
     return async dispatch => {
-      try {
-        const userDetail = await AsyncStorage.getItem('user_details')
-        const Data = JSON.parse(userDetail)
-        
-        let url = `${BASE_URL}notify-count/${Data.id}`
-  
-        const response = await fetch(url, {
-          method: 'GET',
-        });
-  
-        const responseData = await response.json();
-        if (responseData?.success?.status == 200) {
-          dispatch({ type: NOTIFICATION_LENGTH, payload: responseData?.success?.count })
-        } else {
-          console.log('get_notification_Count ==> else error', responseData?.message);
+        try {
+            const userDetail = await AsyncStorage.getItem('user_details')
+            const Data = JSON.parse(userDetail)
+
+            let url = `${BASE_URL}notify-count/${Data.id}`
+
+            const response = await fetch(url, {
+                method: 'GET',
+            });
+
+            const responseData = await response.json();
+            if (responseData?.success?.status == 200) {
+                dispatch({ type: NOTIFICATION_LENGTH, payload: responseData?.success?.count })
+            } else {
+                console.log('get_notification_Count ==> else error', responseData?.message);
+            }
+        } catch (e) {
+            console.log('get_notification_Count catch error', e);
         }
-      } catch (e) {
-        console.log('get_notification_Count catch error', e);
-      }
     }
-  }
+}
+
+export const getTradeDBTaskData = async (type, value, load) => {
+    const userDetail = await AsyncStorage.getItem('user_details')
+    const Data = JSON.parse(userDetail)
+    try {
+        load(true)
+        const url = `${BASE_URL}show-workers-task/${Data.id}`
+        const myData = new FormData()
+
+        myData.append(`type`, type)
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: myData
+        })
+
+        const responseData = await response.json()
+        if (responseData?.success?.status == 200) {
+            value(responseData?.success?.data)
+            setTimeout(() => {
+                load(false)
+            }, 1000);
+        } else {
+            load(false)
+            console.log('else error in getTradeDBTaskData', responseData.error.message)
+        }
+    } catch (error) {
+        load(false)
+        console.log('catch error in getTradeDBTaskData', error)
+    }
+}
+export const getSaleDBTaskData = async (type, value, load) => {
+    const userDetail = await AsyncStorage.getItem('user_details')
+    const Data = JSON.parse(userDetail)
+    try {
+        load(true)
+        const url = `${BASE_URL}show-sales-lead/${Data.id}`
+        const myData = new FormData()
+
+        myData.append(`type`, type)
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: myData
+        })
+
+        const responseData = await response.json()
+        if (responseData?.success?.status == 200) {
+            value(responseData?.success?.data)
+            setTimeout(() => {
+                load(false)
+            }, 1000);
+        } else {
+            load(false)
+            console.log('else error in getSaleDBTaskData', responseData.error.message)
+        }
+    } catch (error) {
+        load(false)
+        console.log('catch error in getSaleDBTaskData', error)
+    }
+}
+
+export const get_dropdown = () => {
+    return async (dispatch) => {
+        try {
+            const url = `${BASE_URL}get-work`;
+            const response = await fetch(url, {
+                method: 'GET',
+            });
+            const responseData = await response.json();
+
+            if (responseData?.success?.status === 200) {
+                const transformedData = responseData.success.data.map(item => {
+                    return { label: item.name, value: item.name };
+                });
+
+                dispatch({ type: DROPDOWN_DATA, payload: transformedData });
+            } else {
+                load(false);
+                console.log('Error in get_dropdown:', responseData.error.message);
+            }
+        } catch (error) {
+            load(false);
+            console.log('Error in get_dropdown:', error);
+        }
+    };
+};

@@ -25,10 +25,7 @@ const AddLead = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (obj) => {
-    console.log("onSubmit");
     const data = { ...obj };
-    // data.imagesAll = allImages;
-    // data.videoAll = allVideos;
     dispatch({ type: JOB_DATA, payload: { data } });
 
     dispatch(

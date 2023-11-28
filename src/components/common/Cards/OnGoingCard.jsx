@@ -14,8 +14,8 @@ const OnGoingCard = ({ data, ...props }) => {
       onPress={props.onPress}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={[styles.Heading]}>Job Name: </Text>
-        <Text style={styles.Title}>{data.name}</Text>
+        <Text style={[styles.Heading]}>Title:&nbsp;</Text>
+        <Text style={styles.Title}>{data.work_scope}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={[styles.Heading]}>Job Number:&nbsp;</Text>

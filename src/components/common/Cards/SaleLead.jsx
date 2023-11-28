@@ -10,7 +10,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Platform,
   Pressable,
 } from "react-native";
@@ -39,16 +38,30 @@ const SaleLead = ({ data, onPress}) => {
           {data?.firstname}&nbsp;{data.lastname}
         </Text>
       </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>scope:&nbsp;</Text>
+        <Text style={styles.DescText}>
+          {data?.work_scope}
+        </Text>
+      </View>
 
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={[styles.Heading]}>budget:&nbsp;</Text>
-        <Text style={styles.DescText}>{data?.work_budget}</Text>
+        <Text style={styles.DescText}>${Number(data?.work_budget).toFixed(2)}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={[styles.Heading]}>Date of finalization:&nbsp;</Text>
         <Text style={styles.DescText}>
           {moment(data?.date_finalization).format("MMM Do YY")}
         </Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>Address:&nbsp;</Text>
+        <Text style={styles.DescText}>{data?.task_address}</Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={[styles.Heading]}>Number:&nbsp;</Text>
+        <Text style={styles.DescText}>{data?.phone_number}</Text>
       </View>
     </Pressable>
   );

@@ -20,7 +20,7 @@ const Notification = () => {
 
   useFocusEffect(
     useCallback(() => {
-      dispatch(getNotificationData(setData,setLoad));
+      getNotificationData(setData,setLoad);
       dispatch(read_notification());
     }, [])
   );

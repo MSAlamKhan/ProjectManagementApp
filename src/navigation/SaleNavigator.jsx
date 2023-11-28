@@ -21,6 +21,10 @@ import ProfileEdit from "../screens/common/ProfileEdit";
 import Terms from "../screens/common/Terms";
 import Notification from "../screens/common/Notification";
 import CompletedJob from "../screens/SalesSide/Home/CompletedJob";
+import ShowFullSaleJobs from "../screens/SalesSide/Jobs/ShowFullSaleJobs";
+
+import SaleFullDetail from "../screens/SalesSide/Jobs/ShowFullSaleJobs/SaleFullDetail";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Text, View } from "react-native";
 import { get_notification_Count } from "../redux/actions/UserAction";
@@ -66,7 +70,7 @@ const SaleNavigator = () => {
         <Tab.Screen
           name="Home"
           component={AllHome}
-          options={{
+          options={{ 
             tabBarLabelStyle: {
               fontFamily: Font.AnekBangla400,
               fontSize: scale(12),
@@ -92,16 +96,20 @@ const SaleNavigator = () => {
             tabBarIcon: ({ color, size }) => (
               <>
               {notification > 0 && (
-                <View 
-                  style={{
-                    borderRadius: 100,
-                    backgroundColor: "red",
-                    width: 10,
-                    aspectRatio: 1 / 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+                 <View
+                 style={{
+                   borderRadius: 100,
+                   backgroundColor: "red",
+                   width: 12,
+                   aspectRatio: 1 / 1,
+                   justifyContent: "center",
+                   alignItems: "center",
+                   position:'absolute',
+                   top:0,
+                   zIndex:1,
+                   right:'40%'
+                 }}
+               >
                   <Text style={{ fontSize: 7, color: "#fff" }}>
                     {notification}
                   </Text>
@@ -149,6 +157,8 @@ function AllHome() {
       <Stack.Screen name="jobmain" component={JobMain} />
       <Stack.Screen name="alltask" component={AllTask} />
       <Stack.Screen name="completejob" component={CompletedJob} />
+      <Stack.Screen name="showFullSaleJobs" component={ShowFullSaleJobs} />
+      <Stack.Screen name="saleFullDetail" component={SaleFullDetail} />
     </Stack.Navigator>
   );
 }

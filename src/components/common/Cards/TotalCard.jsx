@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View,Platform,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View,Platform,Pressable} from 'react-native'
 import React from 'react'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { GlobalStyle } from '../../../constant/GlobalStyle'
 import { Font } from '../../../utils/font'
 import { Colors } from '../../../utils/Color'
 
-const TotalCard = ({total,amount,color, onPress}) => {
+const TotalCard = ({total,amount,color, onPress,onLongPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} style={[styles.Main,{backgroundColor:color}]} onPress={onPress}>
+    <Pressable delayLongPress={150} android_ripple={{color:Colors.Main}} onLongPress={onLongPress} activeOpacity={0.7} style={[styles.Main,{backgroundColor:color,overflow:'hidden',}]} onPress={onPress}>
       <Text style={[GlobalStyle.SimpleText,{textAlign:'center'}]}>{total}</Text>
       <View style={styles.AmountView}>
         <Text style={styles.AmountText}>{amount}</Text>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
@@ -20,6 +20,7 @@ export default TotalCard
 
 const styles = StyleSheet.create({
     Main:{
+      
         height: verticalScale(139),
         width: scale(128),
         borderRadius: scale(20),

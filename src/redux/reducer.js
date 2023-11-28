@@ -15,6 +15,7 @@ export const NOTIFICATION_DATA = 'NOTIFICATION_DATA';
 export const NOTIFICATION_LENGTH = 'NOTIFICATION_LENGTH';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const SELECT_VIDEO = 'SELECT_VIDEO';
+export const DROPDOWN_DATA = 'DROPDOWN_DATA';
 
 
 const initial_state = {
@@ -36,6 +37,7 @@ const initial_state = {
     notification_length: 0,
     select_image: [],
     select_video: [],
+    dropdown_data: [],
 };
 
 const holderReducer = (state = initial_state, action) => {
@@ -125,6 +127,11 @@ const holderReducer = (state = initial_state, action) => {
             return {
                 ...state,
                 select_video: action.payload,
+            };
+        case DROPDOWN_DATA:
+            return {
+                ...state,
+                dropdown_data: action.payload,
             };
         default: {
             return state;

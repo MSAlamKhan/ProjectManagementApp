@@ -7,6 +7,9 @@ const Loader = ({onBackdropPress,isVisible}) => {
   return (
     <Modal
       onBackdropPress={onBackdropPress}
+      
+        animationIn={'fadeIn'}
+        animationOut={'fadeOut'}
       isVisible={isVisible}>
       <View
         style={{

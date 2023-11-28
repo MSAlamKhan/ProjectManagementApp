@@ -1,9 +1,6 @@
 import {
-  StyleSheet,
-  Text,
   View,
   ImageBackground,
-  SafeAreaView,
   StatusBar,
 } from "react-native";
 import React from "react";
@@ -26,4 +23,3 @@ const Background = ({ children }) => {
 
 export default Background;
 
-const styles = StyleSheet.create({});

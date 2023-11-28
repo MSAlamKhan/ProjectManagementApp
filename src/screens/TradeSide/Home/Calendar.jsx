@@ -13,18 +13,9 @@ import CalenderCard from "../../../components/common/Cards/CalenderCard";
 import Empty from "../../../components/common/Cards/Empty";
 import Loader from "../../../components/common/Modals/LoaderModal";
 
-const Calendar = ({navigation}) => {
-    // 
-    // 
-    // 
-    // Install shower pan
-    // Water Test pan
-    // const task_details = [
-    //     { id: 1, name: 'Remove toilet', backgroundColor: '#42CF96', jobNumber : 1, address : "test address 1", contact:"123123123" },
-    //     { id: 2, name: 'Intstall shower valve', backgroundColor: '#42CF96', jobNumber : 2, address : "test address 2", contact:"123123123" },
-    //     { id: 3, name: 'Install shower drain', backgroundColor: '#42CF96', jobNumber : 3, address : "test address 3", contact:"123123123" },
-     
-    // ]
+const Calendar = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const currentDate = moment();
 
   const task_details = useSelector((state) => state.task_details);
 

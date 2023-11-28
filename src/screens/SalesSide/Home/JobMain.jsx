@@ -19,15 +19,6 @@ import { getSalesLead } from "../../../redux/actions/UserAction";
 const JobMain = ({ navigation }) => {
   const dispatch = useDispatch();
   const getJobsData = useSelector((state) => state.get_saleslead_data);
-
-  // const pendingData = getJobsData?.filter((item) => item?.status == "Pending");
-  // const inprogressData = getJobsData?.filter(
-  //   (item) => item?.status == "Inprogress"
-  // );
-  // const completedData = getJobsData?.filter(
-  //   (item) => item?.status == "Completed"
-  // );
-
   useFocusEffect(
     useCallback(() => {
       dispatch(getSalesLead());

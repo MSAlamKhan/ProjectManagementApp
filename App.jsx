@@ -8,7 +8,7 @@ import { USER_DETAILS } from "./src/redux/reducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   getSalesLead,
-  getTradeDashboard,
+  get_dropdown,
   get_notification_Count,
 } from "./src/redux/actions/UserAction";
 import OneSignal from "react-native-onesignal";
@@ -27,7 +27,6 @@ const App = () => {
     OneSignal.setNotificationWillShowInForegroundHandler(
       (notificationReceivedEvent) => {
         let notification = notificationReceivedEvent.getNotification();
-        console.log("notification: ", notification);
         OneSignal.add;
         const data = notification.additionalData;
         if (data?.type == "message") {
@@ -42,7 +41,6 @@ const App = () => {
       if (event.to.isSubscribed) {
         const state = await OneSignal.getDeviceState();
         await AsyncStorage.setItem("onesignaltoken", state.userId);
-        console.log("token", state.userId);
       }
     });
   }, []);
@@ -50,7 +48,7 @@ const App = () => {
   useEffect(() => {
     getUserData();
     dispatch(getSalesLead());
-    dispatch(getTradeDashboard());
+    dispatch(get_dropdown());
   }, []);
 
   const getUserData = async () => {

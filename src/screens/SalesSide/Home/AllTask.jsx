@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GlobalStyle } from "../../../constant/GlobalStyle";
-import { SafeAreaView, StyleSheet, FlatList, View } from "react-native";
+import { SafeAreaView,  FlatList, View } from "react-native";
 
 import Empty from "../../../components/common/Cards/Empty";
 import BackIcon from "../../../components/common/BackIcon";
@@ -40,5 +40,3 @@ const AllTask = ({ navigation }) => {
 };
 
 export default AllTask;
-
-const styles = StyleSheet.create({});

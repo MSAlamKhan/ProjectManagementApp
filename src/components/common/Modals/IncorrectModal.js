@@ -1,9 +1,7 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { scale, verticalScale } from 'react-native-size-matters'
+import { scale } from 'react-native-size-matters'
 import Modal from 'react-native-modal'
-import LottieView from 'lottie-react-native'
-import { useSelector } from 'react-redux'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { Font } from '../../../utils/font'
 import { Colors } from '../../../utils/Color'
@@ -12,7 +10,6 @@ const w = Dimensions.get('window').width;
 const h = Dimensions.get('window').height;
 
 const IncorrectModal = (props) => {
-  const Theme = useSelector(state => state.mode)
   return (
     <Modal
       backdropOpacity={0.4}

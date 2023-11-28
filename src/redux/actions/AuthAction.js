@@ -3,7 +3,7 @@ import { OTP, USER_DETAILS } from "../reducer"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export const LoginApi = (data, setLoading, setCheck,os) => {
+export const LoginApi = (data, setLoading, setCheck, os) => {
     return async (dispatch) => {
         const deviceToken = await AsyncStorage.getItem('onesignaltoken')
         try {
@@ -110,7 +110,8 @@ export const ChangePassApi = async (data, userData, setLoading, navigation, Toas
         console.log('error', error)
     }
 }
-export const EditProfileApi = (data, image, setLoading, setSuccessModal, setIsEditing, setMsg, navigation) => {
+export const EditProfileApi = (data, primary, secondary, image, setLoading, setSuccessModal, setIsEditing, setMsg, navigation) => {
+    console.log('primary, secondary,', primary, secondary,)
     return async (dispatch) => {
         try {
             setLoading(true)
@@ -125,8 +126,8 @@ export const EditProfileApi = (data, image, setLoading, setSuccessModal, setIsEd
             myData.append('address', data.address)
             myData.append('city', data.city)
             myData.append('sin_number', data.sin_no)
-            myData.append('primary_trade', data.primary)
-            myData.append('secondary_trade', data.secondary)
+            myData.append('primary_trade', primary)
+            myData.append('secondary_trade', secondary)
             {
                 image?.uri &&
 

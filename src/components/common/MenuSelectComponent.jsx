@@ -42,8 +42,7 @@ const MenuSelectComponent = ({
           style={[
             styles.MenuBox,
             {
-              backgroundColor:
-               Colors.LightBlue,
+              backgroundColor: menu === "first" ? Colors.Blue : Colors.White,
             },
           ]}
         >
@@ -63,8 +62,7 @@ const MenuSelectComponent = ({
           style={[
             styles.MenuBox,
             {
-              backgroundColor:
-                Colors.Green,
+              backgroundColor: menu === "second" ? Colors.Blue : Colors.White,
             },
           ]}
           onPress={() => setMenu("second")}
@@ -85,8 +83,7 @@ const MenuSelectComponent = ({
           style={[
             styles.MenuBox,
             {
-              backgroundColor:
-                Colors.Blue,
+              backgroundColor: menu === "third" ? Colors.Blue : Colors.White,
             },
           ]}
           onPress={() => setMenu("third")}

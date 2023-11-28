@@ -1,4 +1,4 @@
-import { StyleSheet, View, StatusBar, Image } from "react-native";
+import { View, StatusBar, Image } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Color";
 import { GlobalStyle } from "../../constant/GlobalStyle";
@@ -17,4 +17,3 @@ const SplashScreen = () => {
 
 export default SplashScreen;
 
-const styles = StyleSheet.create({});

@@ -9,9 +9,8 @@ import { Colors } from '../../../utils/Color';
 import { Font } from '../../../utils/font';
 
 
-const ImagePickerModal = ({OnPressCamera, OnPressPhoto, visible, onClose}) => {
+const ImagePickerModal = ({OnPressCamera, OnPressPhoto, visible, onClose,photoText,cameraText,cameraName,photoName}) => {
   return (
-    <View>
       <ReactNativeModal
         backdropOpacity={0.3}
         onBackdropPress={onClose}
@@ -34,20 +33,19 @@ const ImagePickerModal = ({OnPressCamera, OnPressPhoto, visible, onClose}) => {
           <View style={styles.SecCon}>
             <TouchableOpacity onPress={OnPressPhoto} style={styles.ModalBtn}>
               <MaterialIcons
-                name="photo"
+                name={photoName}
                 size={scale(32)}
-                color={Colors.Main}
+                color={Colors.Black}
               />
-              <Text style={styles.Text1}>Upload picture</Text>
+              <Text style={styles.Text1}>{cameraText}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={OnPressCamera} style={styles.ModalBtn}>
-              <Entypo name="camera" size={scale(30)} color={Colors.Main} />
-              <Text style={styles.Text1}>Take a picture</Text>
+              <Entypo name={cameraName} size={scale(30)} color={Colors.Black} />
+              <Text style={styles.Text1}>{photoText}</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ReactNativeModal>
-    </View>
   );
 };
 

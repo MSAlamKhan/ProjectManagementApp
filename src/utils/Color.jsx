@@ -12,5 +12,4 @@ export const Colors = {
   DateSelect: "#2FD1C5",
   Green: "#06A23E",
   Non: "transparent",
-  LightBlue:"#68BCE3"
 };
