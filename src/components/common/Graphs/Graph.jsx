@@ -8,7 +8,7 @@ import { getGraphData } from "../../../redux/actions/UserAction";
 
 const { width } = Dimensions.get("window");
 
-const Graph = ({ type, color }) => {
+const Graph = ({ type, color,legend }) => {
   const [load, setLoad] = useState(true);
   const [value, setValue] = useState([]);
 
@@ -18,8 +18,7 @@ const Graph = ({ type, color }) => {
 
  
   const chartConf = {
-    decimalPlaces: 0, // Ensures no decimal places are shown
-    formatYLabel: (label) => label.toString(),
+    decimalPlaces: 1, // Ensures no decimal places are shown
      backgroundGradientFrom: Colors.White,
      backgroundGradientTo: Colors.White,
      color: () => color,
@@ -30,6 +29,9 @@ const Graph = ({ type, color }) => {
      propsForDots: {
        r: scale(5),
      },
+     yAxisSuffix:{
+       display:false
+     },
    };
 
   const data = {
@@ -39,7 +41,7 @@ const Graph = ({ type, color }) => {
         data: value?.value,
       },
     ],
-    legend: ["Workload"],
+    legend: [legend],
   };
 
   return load ? (

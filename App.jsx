@@ -20,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     // OneSignal.setAppId("41ec2948-bcfd-4204-ae97-052901f03973");
+    // OneSignal.setAppId("6f7696a9-805e-4821-91bc-6dcfd4a62367");
     OneSignal.setAppId("6f7696a9-805e-4821-91bc-6dcfd4a62367");
     OneSignal.promptForPushNotificationsWithUserResponse((response) => {
       console.log("Prompt response:", response);
@@ -54,7 +55,9 @@ const App = () => {
 
   const getUserData = async () => {
     const data = await AsyncStorage.getItem("user_details");
+    const onesignaltoken = await AsyncStorage.getItem("onesignaltoken");
     const cnvrtData = JSON.parse(data);
+    console.log('onesignaltoken --vvb--', onesignaltoken)
 
     if (cnvrtData) {
       dispatch({ type: USER_DETAILS, payload: cnvrtData });

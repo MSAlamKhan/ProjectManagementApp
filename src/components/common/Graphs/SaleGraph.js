@@ -8,27 +8,28 @@ import {  getSaleGraphData } from "../../../redux/actions/UserAction";
 
 const { width } = Dimensions.get("window");
 
-const SaleGraph = ({ type, color,select }) => {
+const SaleGraph = ({ type, color,select,legend }) => {
   const [load, setLoad] = useState(true);
   const [value, setValue] = useState([]);
   useEffect(() => {
     getSaleGraphData(type, setValue, setLoad,select);
-  }, [type,select]);
+  }, [type,select,legend,color]);
 
  
   const chartConf = {
     decimalPlaces: 0,
-     backgroundGradientFrom: Colors.White,
-     backgroundGradientTo: Colors.White,
-     color: () => color,
-     strokeWidth: 2,
-     barPercentage: 0.5,
-     useShadowColorFromDataset: false,
-     labelColor: () => Colors.Black,
-     propsForDots: {
-       r: scale(5),
-     },
-   };
+    backgroundGradientFrom: Colors.White,
+    backgroundGradientTo: Colors.White,
+    color: () => color,
+    strokeWidth: 2,
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false,
+    labelColor: () => Colors.Black,
+    propsForDots: {
+      r: scale(5),
+    },
+    yAxisLabel: "", // Set Y-axis label to an empty string
+  };
 
   const data = {
     labels: value?.label,
@@ -37,7 +38,7 @@ const SaleGraph = ({ type, color,select }) => {
         data: value?.value,
       },
     ],
-    legend: ["Workload"],
+    legend: [legend],
   };
 
   return load ? (

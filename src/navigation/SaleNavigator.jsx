@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 //Icons Import
-import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import Octicons from "react-native-vector-icons/Octicons";
 
@@ -116,7 +116,7 @@ const SaleNavigator = () => {
                 </View>
               )}
 
-              <Ionicons name={"notifications"} color={color} size={size} />
+              <FontAwesome name={"bell-o"} color={color} size={size} />
             </>
             ),
           }}

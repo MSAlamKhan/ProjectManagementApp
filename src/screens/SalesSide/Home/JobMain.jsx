@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -19,11 +19,9 @@ import { getSalesLead } from "../../../redux/actions/UserAction";
 const JobMain = ({ navigation }) => {
   const dispatch = useDispatch();
   const getJobsData = useSelector((state) => state.get_saleslead_data);
-  useFocusEffect(
-    useCallback(() => {
+    useEffect(() => {
       dispatch(getSalesLead());
-    }, [])
-  );
+    }, [getJobsData]);
 
   return (
     <SafeAreaView style={GlobalStyle.safeAreaStyle}>

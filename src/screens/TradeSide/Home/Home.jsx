@@ -24,6 +24,7 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const [type, setType] = useState("total");
   const [color, setColor] = useState("#0077B6");
+  const [legend, setLegend] = useState("Total Job assigned");
   const [refreshing, setRefreshing] = useState(false);
   const { height } = Dimensions.get("window");
   const data = useSelector((state) => state.get_trade_dashboard_data);
@@ -40,7 +41,7 @@ const Home = ({ navigation }) => {
       onPress: () =>
         navigation.navigate("showFullTradeJobs", { type: "total" }),
       onLongPress: () => {
-        setType("total"), setColor("#0077B6");
+        setType("total"), setColor("#0077B6"), setLegend("Total Job assigned");
       },
     },
     {
@@ -51,7 +52,9 @@ const Home = ({ navigation }) => {
       onPress: () =>
         navigation.navigate("showFullTradeJobs", { type: "completed" }),
       onLongPress: () => {
-        setType("completed"), setColor("#1E90FF");
+        setType("completed"),
+          setColor("#1E90FF"),
+          setLegend("Total completed submissions");
       },
     },
     {
@@ -61,7 +64,7 @@ const Home = ({ navigation }) => {
       color: "#1E90FF",
       onPress: () => navigation.navigate("showFullTradeJobs", { type: "late" }),
       onLongPress: () => {
-        setType("late"), setColor("#1E90FF");
+        setType("late"), setColor("#1E90FF"), setLegend("Total number of job delivered late");
       },
     },
     {
@@ -72,7 +75,7 @@ const Home = ({ navigation }) => {
       onPress: () =>
         navigation.navigate("showFullTradeJobs", { type: "pending" }),
       onLongPress: () => {
-        setType("pending"), setColor("#FFAD41");
+        setType("pending"), setColor("#FFAD41"), setLegend("Total number of job pending");
       },
     },
   ];
@@ -86,7 +89,7 @@ const Home = ({ navigation }) => {
   return (
     <Background>
       <ScrollView
-       showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
             tintColor={Colors.Main}
@@ -124,7 +127,7 @@ const Home = ({ navigation }) => {
             marginTop: verticalScale(10),
           }}
         >
-          <Graph type={type} color={color}/>
+          <Graph type={type} color={color} legend={legend}/>
 
           <CustomButton
             onPress={() => navigation.navigate("calendar")}

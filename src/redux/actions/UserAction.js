@@ -1,6 +1,6 @@
 import { BASE_URL } from "../../utils/Base_urls"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DROPDOWN_DATA, GETTING_LATE, GET_DASHBOARD_DATA, GET_ID_TASK, GET_LEAD_TASK, GET_SALESLEAD_DATA, GET_TRADE_DASHBOARD_DATA, NOTIFICATION_DATA, NOTIFICATION_LENGTH, TASK_DETAILS } from "../reducer";
+import { DROPDOWN_DATA, GETTING_LATE, GET_DASHBOARD_DATA, GET_ID_TASK, GET_LEAD_TASK, GET_SALESLEAD_DATA, GET_TRADE_DASHBOARD_DATA, SELECT_VIDEO, NOTIFICATION_LENGTH, TASK_DETAILS,SELECT_IMAGE } from "../reducer";
 
 export const AddJob = (data, images, video, tareekh, load, Success, navigation) => {
     load(true)
@@ -38,6 +38,8 @@ export const AddJob = (data, images, video, tareekh, load, Success, navigation) 
 
             if (responseData?.success?.status == 200) {
                 load(false)
+                dispatch({type: SELECT_VIDEO, payload:[]})
+                dispatch({type: SELECT_IMAGE, payload:[]})
                 Success(true);
                 setTimeout(() => {
                     Success(false);
@@ -66,7 +68,7 @@ export const getSalesLead = () => {
                 method: 'GET',
             })
             const responseData = await response.json()
-            if (responseData?.success?.status == 200) {
+            if (responseData.success.status == 200) {
                 dispatch({ type: GET_SALESLEAD_DATA, payload: responseData?.success?.data })
             } else {
                 console.log(responseData.error.message)
@@ -93,7 +95,7 @@ export const getSalesDashboard = (duration) => {
                 body: myData,
             })
             const responseData = await response.json()
-            if (responseData?.success?.status == 200) {
+            if (responseData.success.status == 200) {
                 dispatch({ type: GET_DASHBOARD_DATA, payload: responseData?.success?.data })
             } else {
                 console.log('else error in getSalesDashboard', responseData?.error?.message)
@@ -300,7 +302,7 @@ export const getNotificationData = async (data, load) => {
             method: 'GET',
         })
         const responseData = await response.json()
-        if (responseData?.success?.status == 200) {
+        if (responseData.success.status == 200) {
             load(false)
             data(responseData?.success?.data)
         } else {
@@ -316,6 +318,7 @@ export const getNotificationData = async (data, load) => {
 export const getGraphData = async (type, value, load) => {
     const userDetail = await AsyncStorage.getItem('user_details')
     const Data = JSON.parse(userDetail)
+    console.log('type', type)
     try {
         const url = `${BASE_URL}chart-dashboard/${Data.id}`
         const myData = new FormData()
@@ -347,6 +350,7 @@ export const getSaleGraphData = async (type, value, load, duration) => {
     const userDetail = await AsyncStorage.getItem('user_details')
     const Data = JSON.parse(userDetail)
     try {
+        console.log('type', type,'===>', duration)
         const url = `${BASE_URL}chart-dashboard/${Data.id}`
         const myData = new FormData()
 
@@ -359,7 +363,7 @@ export const getSaleGraphData = async (type, value, load, duration) => {
         })
 
         const responseData = await response.json()
-        if (responseData?.success?.status == 200) {
+        if (responseData.success.status == 200) {
             value(responseData?.success?.data)
             setTimeout(() => {
                 load(false)
@@ -369,7 +373,6 @@ export const getSaleGraphData = async (type, value, load, duration) => {
             console.log('else error in getSaleGraphData', responseData.error.message)
         }
     } catch (error) {
-        load(false)
         console.log('catch error in getSaleGraphData', error)
     }
 }
@@ -388,7 +391,7 @@ export const get_notification_Count = () => {
             });
 
             const responseData = await response.json();
-            if (responseData?.success?.status == 200) {
+            if (responseData.success.status == 200) {
                 dispatch({ type: NOTIFICATION_LENGTH, payload: responseData?.success?.count })
             } else {
                 console.log('get_notification_Count ==> else error', responseData?.message);
@@ -469,7 +472,7 @@ export const get_dropdown = () => {
             });
             const responseData = await response.json();
 
-            if (responseData?.success?.status === 200) {
+            if (responseData?.success?.status == 200) {
                 const transformedData = responseData.success.data.map(item => {
                     return { label: item.name, value: item.name };
                 });

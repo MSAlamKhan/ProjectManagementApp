@@ -31,6 +31,8 @@ const Home = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [type, setType] = useState("total");
   const [color, setColor] = useState("#1E90FF");
+  const [legend, setLegend] = useState("Total Number of Project");
+
   const [showModal, setShowModal] = useState(false);
   const [select, setSelect] = useState(30);
   const get_dashboard_data = useSelector((state) => state.get_dashboard_data);
@@ -46,7 +48,9 @@ const Home = ({ navigation }) => {
       color: "#1E90FF",
       onPress: () => navigation.navigate("showFullSaleJobs", { type: "total" }),
       onLongPress: () => {
-        setType("total"), setColor("#1E90FF");
+        setType("total"),
+          setColor("#1E90FF"),
+          setLegend("Total Number of Project");
       },
     },
     {
@@ -57,7 +61,9 @@ const Home = ({ navigation }) => {
       onPress: () =>
         navigation.navigate("showFullSaleJobs", { type: "inprogress" }),
       onLongPress: () => {
-        setType("completed"), setColor("#FFAD41");
+        setType("completed"),
+          setColor("#FFAD41"),
+          setLegend("Total Projects underprogress");
       },
     },
     {
@@ -68,7 +74,9 @@ const Home = ({ navigation }) => {
       onPress: () =>
         navigation.navigate("showFullSaleJobs", { type: "completed" }),
       onLongPress: () => {
-        setType("completed"), setColor("#0077B6");
+        setType("completed"),
+          setColor("#0077B6"),
+          setLegend("Total completed Projects");
       },
     },
   ];
@@ -138,7 +146,7 @@ const Home = ({ navigation }) => {
             marginTop: verticalScale(10),
           }}
         >
-          <SaleGraph type={type} color={color} select={select} />
+          <SaleGraph type={type} color={color} select={select} legend={legend}/>
 
           <CustomButton
             onPress={() => navigation.navigate("jobmain")}
@@ -156,7 +164,12 @@ const Home = ({ navigation }) => {
         animationOut={"fadeOut"}
       >
         <View
-          style={{ width: iOS ?  170 :  140, backgroundColor: "#fff", paddingVertical: 20,borderRadius:7 }}
+          style={{
+            width: 170,
+            backgroundColor: "#fff",
+            paddingVertical: 20,
+            borderRadius: 7,
+          }}
         >
           <FlatList
             data={daysData}

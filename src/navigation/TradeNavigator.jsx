@@ -1,10 +1,10 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 //Icons Import
-import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import Octicons from "react-native-vector-icons/Octicons";
 
@@ -33,10 +33,9 @@ const TradeNavigator = () => {
   const Tab = createBottomTabNavigator();
   const dispatch = useDispatch();
 
-  
-  const notification = useSelector((state) => state.notification_length)
+  const notification = useSelector((state) => state.notification_length);
   OneSignal.setNotificationWillShowInForegroundHandler(
-    notificationReceivedEvent => {
+    (notificationReceivedEvent) => {
       let notification = notificationReceivedEvent.getNotification();
       OneSignal.add;
       const data = notification.additionalData;
@@ -45,9 +44,9 @@ const TradeNavigator = () => {
       } else {
         dispatch(get_notification_Count());
       }
-      console.log('data', data);
+      console.log("data", data);
       notificationReceivedEvent.complete(notification);
-    },
+    }
   );
 
   return (
@@ -102,10 +101,10 @@ const TradeNavigator = () => {
                       aspectRatio: 1 / 1,
                       justifyContent: "center",
                       alignItems: "center",
-                      position:'absolute',
-                      top:0,
-                      zIndex:1,
-                      right:'40%'
+                      position: "absolute",
+                      top: 0,
+                      zIndex: 1,
+                      right: "40%",
                     }}
                   >
                     <Text style={{ fontSize: 8, color: "#fff" }}>
@@ -113,8 +112,7 @@ const TradeNavigator = () => {
                     </Text>
                   </View>
                 )}
-
-                <Ionicons name={"notifications"} color={color} size={size} />
+                <FontAwesome name={"bell-o"} color={color} size={size} />
               </>
             ),
           }}

@@ -25,7 +25,7 @@ const Index = ({route,navigation}) => {
           data={data}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
-          ListEmptyComponent={() => <Empty marginTop={"30%"} />}
+          ListEmptyComponent={() => <Empty marginTop={"20%"} />}
           renderItem={({ item }) => (
             <SaleFullCard
               data={item}

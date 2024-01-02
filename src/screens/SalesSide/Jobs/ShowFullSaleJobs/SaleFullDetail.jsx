@@ -50,7 +50,7 @@ const SaleFullDetail = ({ route }) => {
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={[styles.Heading]}>budget:&nbsp;</Text>
         <Text style={styles.DescText}>
-          ${item?.work_budget}.00
+          ${Number(item?.work_budget).toFixed(2)}
         </Text>
       </View>
 

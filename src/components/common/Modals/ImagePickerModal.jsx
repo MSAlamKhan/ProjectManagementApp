@@ -26,10 +26,6 @@ const ImagePickerModal = ({OnPressCamera, OnPressPhoto, visible, onClose,photoTe
             justifyContent: 'flex-end',
             alignItems: 'center',
           }}>
-          <TouchableOpacity onPress={onClose} style={styles.CrossBOx}>
-            <Entypo name="cross" size={scale(25)} color={Colors.White} />
-          </TouchableOpacity>
-
           <View style={styles.SecCon}>
             <TouchableOpacity onPress={OnPressPhoto} style={styles.ModalBtn}>
               <MaterialIcons
@@ -72,14 +68,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: scale(15),
     borderTopRightRadius: scale(15),
-  },
-  CrossBOx: {
-    backgroundColor: Colors.Main,
-    width: scale(25),
-    borderRadius: 100,
-    alignItems: 'center',
-    marginBottom: verticalScale(-10),
-    zIndex: 9,
-    aspectRatio: 1 / 1,
   },
 });

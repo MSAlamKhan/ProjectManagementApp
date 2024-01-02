@@ -61,7 +61,8 @@ export const ForgotPassApi = (data, setLoading, navigation, type, setCheck) => {
                 setLoading(false)
                 if (!type) {
                     navigation.navigate('otp', {
-                        data: responseData?.success?.data
+                        data: responseData?.success?.data,
+                        email: data.email
                     })
                 } else {
                     console.log('object')

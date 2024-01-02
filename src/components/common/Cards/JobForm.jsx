@@ -77,8 +77,8 @@ const JobForm = ({ onSubmit, onCameraPress, onVideoPress, type }) => {
         rules={{
           required: "Phone number is required",
           message: "Please enter your phone number",
-          maxLength: {
-            value: 15,
+          minLength: {
+            value: 10,
             message: "Please enter a valid phone number",
           },
         }}
